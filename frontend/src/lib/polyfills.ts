@@ -1,5 +1,5 @@
 /**
- * Polyfills for browser environment to support Stellar SDK
+ * Polyfills for browser environment to support Blockchain SDK
  */
 import { Buffer } from "buffer";
 import { EventEmitter } from "events";

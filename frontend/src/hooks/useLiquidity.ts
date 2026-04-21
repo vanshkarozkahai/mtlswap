@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { TransactionBuilder, Contract, Address, xdr, nativeToScVal } from "@stellar/stellar-sdk";
-import { server, NETWORK_DETAILS, CONTRACT_IDS } from "@/lib/stellar";
+import { server, NETWORK_DETAILS, CONTRACT_IDS } from "@/lib/blockchain";
 import { signWithFreighter } from "@/lib/freighter";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";

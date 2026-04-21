@@ -1,6 +1,6 @@
-# Contributing to StellarSwap
+# Contributing to Blockchain Swap
 
-We're excited that you're interested in contributing to StellarSwap! This project is a community-driven Decentralized Exchange on the Stellar network.
+We're excited that you're interested in contributing to Blockchain Swap! This project is a community-driven Decentralized Exchange on the Blockchain network.
 
 ## 🤝 Code of Conduct
 Please be respectful and professional in all interactions. We follow standard open-source diversity and inclusion guidelines.

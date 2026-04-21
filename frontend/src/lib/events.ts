@@ -1,5 +1,5 @@
 import { scValToNative, rpc } from "@stellar/stellar-sdk";
-import { server, CONTRACT_IDS } from "./stellar";
+import { server, CONTRACT_IDS } from "./blockchain";
 
 export interface ParsedEvent {
   id: string;

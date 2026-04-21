@@ -1,4 +1,4 @@
-name: StellarSwap CI
+name: Blockchain Swap CI
 
 on:
   push:

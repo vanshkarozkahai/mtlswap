@@ -42,28 +42,28 @@ export default function LiveFeed() {
     return (
       <button 
         onClick={() => setIsCollapsed(false)}
-        className="fixed top-24 right-4 md:right-6 glass p-3 rounded-full hover:scale-110 active:scale-95 transition-all z-[100] shadow-xl border-white/5"
+        className="fixed top-24 right-4 md:right-6 bg-white p-3 rounded-full hover:scale-110 active:scale-95 transition-all z-[100] shadow-xl border border-slate-200"
       >
-        <Radio size={20} className={isConnected ? "text-green-500 animate-pulse" : "text-zinc-500"} />
+        <Radio size={20} className={isConnected ? "text-brand-cyan animate-pulse" : "text-slate-400"} />
       </button>
     );
   }
 
   return (
-    <div className="fixed top-24 right-4 md:right-6 w-[280px] md:w-[320px] max-h-[calc(100vh-140px)] glass rounded-3xl z-[100] flex flex-col shadow-2xl border-white/10">
-      <div className="p-4 border-b border-white/5 flex items-center justify-between">
+    <div className="fixed top-24 right-4 md:right-6 w-[280px] md:w-[320px] max-h-[calc(100vh-140px)] bg-white/90 backdrop-blur-xl rounded-3xl z-[100] flex flex-col shadow-2xl border border-slate-200">
+      <div className="p-4 border-b border-slate-100 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${isConnected ? "bg-green-500 animate-pulse" : "bg-zinc-500"}`} />
-          <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Network Feed</span>
+          <div className={`w-2 h-2 rounded-full ${isConnected ? "bg-brand-cyan animate-pulse" : "bg-slate-300"}`} />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Blockchain Feed</span>
         </div>
         <div className="flex items-center gap-1">
           <button 
             onClick={() => setIsSoundEnabled(!isSoundEnabled)}
-            className={`p-1.5 rounded-lg transition-colors ${isSoundEnabled ? "text-stellar-blue bg-stellar-blue/10" : "text-zinc-600 hover:bg-white/5"}`}
+            className={`p-1.5 rounded-lg transition-colors ${isSoundEnabled ? "text-brand-cyan bg-cyan-50" : "text-slate-400 hover:bg-slate-50"}`}
           >
              <Radio size={14} />
           </button>
-          <button onClick={() => setIsCollapsed(true)} className="p-1.5 hover:bg-white/5 rounded-lg text-zinc-500">
+          <button onClick={() => setIsCollapsed(true)} className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-400">
             <X size={16} />
           </button>
         </div>
@@ -80,55 +80,55 @@ export default function LiveFeed() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-colors group relative overflow-hidden"
+                className="p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-cyan/30 transition-colors group relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex items-center gap-2">
                     {getEventIcon(event.type)}
                     <span className={`text-[9px] font-bold tracking-tighter ${
-                      event.type === 'swap' ? 'text-cyan-400' : 
-                      event.type === 'deposit' ? 'text-green-400' : 
-                      event.type === 'withdraw' ? 'text-red-400' : 'text-zinc-400'
+                      event.type === 'swap' ? 'text-brand-cyan' : 
+                      event.type === 'deposit' ? 'text-emerald-600' : 
+                      event.type === 'withdraw' ? 'text-rose-600' : 'text-slate-400'
                     }`}>
                       {getEventLabel(event.type)}
                     </span>
                   </div>
                   <a 
-                    href={`https://stellar.expert/explorer/testnet/tx/${event.id.split('-')[0]}`} 
+                    href={`https://blockchain.expert/explorer/testnet/tx/${event.id.split('-')[0]}`} 
                     target="_blank"
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <ExternalLink size={10} className="text-zinc-500 hover:text-white" />
+                    <ExternalLink size={10} className="text-slate-400 hover:text-brand-cyan" />
                   </a>
                 </div>
                 
                 <div className="flex flex-col gap-1">
-                  <div className="text-[10px] font-mono text-zinc-500">
-                    User: <span className="text-white">{event.user.slice(0, 6)}...{event.user.slice(-4)}</span>
+                  <div className="text-[10px] font-mono text-slate-400">
+                    User: <span className="text-slate-900">{event.user.slice(0, 6)}...{event.user.slice(-4)}</span>
                   </div>
-                  <div className="text-xs font-bold truncate">
+                  <div className="text-xs font-bold truncate text-slate-900">
                     {event.type === 'swap' ? (
-                       <span>{Number(event.data.amountIn) / 1e7} XLM → {Number(event.data.amountOut) / 1e7} TKNA</span>
+                       <span>{Number(event.data.amountIn) / 1e7} XLM → {Number(event.data.amountOut) / 1e7} BSWP</span>
                     ) : event.type === 'deposit' ? (
                        <span>Added {Number(event.data.amountA) / 1e7} / {Number(event.data.amountB) / 1e7}</span>
                     ) : (
-                       <span>Protocol Activity Detected</span>
+                       <span>Blockchain Activity Detected</span>
                     )}
                   </div>
                 </div>
               </motion.div>
             ))
           ) : (
-            <div className="h-40 flex flex-col items-center justify-center text-zinc-600 gap-3 opacity-30">
-               <Radio size={32} className="animate-pulse" />
-               <p className="text-[10px] uppercase font-bold tracking-[0.2em]">Listening...</p>
+            <div className="h-40 flex flex-col items-center justify-center text-slate-300 gap-3">
+               <Radio size={32} className="opacity-20 animate-pulse" />
+               <p className="text-[10px] uppercase font-bold tracking-[0.2em] opacity-40">Listening...</p>
             </div>
           )}
         </AnimatePresence>
       </div>
 
-      <div className="p-3 bg-white/[0.02] border-t border-white/5 text-center">
-         <p className="text-[9px] text-zinc-600 font-mono italic">Subscribed to Soroban RPC getEvents</p>
+      <div className="p-3 bg-slate-50/50 border-t border-slate-100 text-center">
+         <p className="text-[9px] text-slate-400 font-mono italic">Subscribed to Network getEvents</p>
       </div>
     </div>
   );

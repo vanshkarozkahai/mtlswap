@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { server, CONTRACT_IDS } from "@/lib/stellar";
+import { server, CONTRACT_IDS } from "@/lib/blockchain";
 import { Contract, Address } from "@stellar/stellar-sdk";
 
 export const usePoolData = (tokenIn: string, amountIn: string, userAddress?: string | null) => {

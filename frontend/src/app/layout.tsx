@@ -4,13 +4,13 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import LiveFeed from "@/components/LiveFeed";
 
-import { StellarProvider } from "@/context/StellarContext";
+import { BlockchainProvider } from "@/context/BlockchainContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "StellarSwap | Decentralized Exchange",
-  description: "Swap tokens on Stellar with Soroban smart contracts",
+  title: "Blockchain Swap | Decentralized Exchange",
+  description: "Swap tokens on the blockchain with Soroban smart contracts",
 };
 export default function RootLayout({
   children,
@@ -20,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <StellarProvider>
+        <BlockchainProvider>
           {children}
           <LiveFeed />
           <Toaster richColors position="top-right" />
-        </StellarProvider>
+        </BlockchainProvider>
       </body>
     </html>
   );

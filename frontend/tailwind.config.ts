@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        stellar: {
-          blue: "#015ad1",
-          gold: "#f5a623",
-          black: "#000000",
+        brand: {
+          cyan: "#06b6d4",
+          blue: "#0284c7",
+          slate: "#0f172a",
         },
       },
     },

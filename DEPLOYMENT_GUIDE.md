@@ -1,6 +1,6 @@
-# StellarSwap Deployment Guide
+# Blockchain Swap Deployment Guide
 
-This guide provides step-by-step instructions for deploying the StellarSwap DEX platform to production/testnet environments.
+This guide provides step-by-step instructions for deploying the Blockchain Swap DEX platform to production/testnet environments.
 
 ## 🌐 Frontend Deployment (Vercel)
 
@@ -17,7 +17,7 @@ This guide provides step-by-step instructions for deploying the StellarSwap DEX 
 
 ---
 
-## 🦀 Soroban Contract Deployment (Stellar Testnet)
+## 🦀 Soroban Contract Deployment (Blockchain Testnet)
 
 Follow these steps to deploy the smart contracts manually or via CLI.
 
@@ -43,7 +43,7 @@ Deploy the WASM files to the Testnet:
 ```bash
 # Example for the Token contract
 stellar contract deploy \
-  --wasm ./target/wasm32-unknown-unknown/release/stellarswap_token.wasm \
+  --wasm ./target/wasm32-unknown-unknown/release/blockchain-swap_token.wasm \
   --source deployer \
   --network testnet
 ```

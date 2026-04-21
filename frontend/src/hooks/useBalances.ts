@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { horizonServer } from "@/lib/stellar";
+import { horizonServer } from "@/lib/blockchain";
 
 interface Balances {
   XLM: number;

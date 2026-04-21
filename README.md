@@ -1,28 +1,28 @@
-# 🧪 StellarSwap
+# 🧪 Blockchain Swap
 
-![StellarSwap Hero Banner](assets/protocol-hub.png)
+![Blockchain Swap Hero Banner](assets/protocol-hub.png)
 
 <div align="center">
-  <p><strong>Trade at the Speed of Stellar. Atomic. Transparent. Interconnected.</strong></p>
+  <p><strong>Trade at the Speed of Blockchain. Atomic. Transparent. Interconnected.</strong></p>
   
-  [![StellarSwap CI](https://github.com/greyparadox1337/stellarswap/actions/workflows/ci.yml/badge.svg)](https://github.com/greyparadox1337/stellarswap/actions/workflows/ci.yml)
+  [![Blockchain Swap CI](https://github.com/greyparadox1337/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/greyparadox1337/blockchain-swap/actions/workflows/ci.yml)
   [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
   [![Network: Testnet](https://img.shields.io/badge/Network-Testnet-cyan.svg)](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases)
 </div>
 
 ---
 
-### 🚀 [Live Demo](https://stellarswap-kappa.vercel.app)
+### 🚀 [Live Demo](https://blockchain-swap-kappa.vercel.app)
 
-StellarSwap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Stellar network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
+Blockchain Swap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
 
 ## ✨ Features
 
 - **Atomic Multi-Contract Execution**: Uses a dedicated Router contract to coordinate swaps across Token and Pool contracts in a single transaction.
 - **AMM Constant Product Formula**: Implements $x \times y = k$ logic with a 0.3% protocol fee for liquidity providers.
-- **Real-Time Event Streaming**: Sub-second trade awareness powered by Soroban RPC event polling.
-- **Premium Glassmorphism UI**: High-fidelity trading desk built with Next.js 14, Framer Motion, and Tailwind CSS.
-- **Deep Obsidian Aesthetics**: Custom dark-mode design system with floating 3D elements and vibrant gradients.
+- **Real-Time Event Streaming**: Sub-second trade awareness powered by Network event polling.
+- **Premium Light Theme UI**: High-fidelity trading desk built with Next.js 14, Framer Motion, and Tailwind CSS.
+- **White and Cyan Aesthetics**: Professional light-themed design system with clean interfaces and vibrant accents.
 
 ## 📱 Visual Showcase
 
@@ -32,7 +32,7 @@ StellarSwap is an institutional-grade Decentralized Exchange (DEX) protocol buil
 
 ## 🏗️ Technical Architecture
 
-StellarSwap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
+Blockchain Swap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
 
 ```mermaid
 graph TD
@@ -50,14 +50,13 @@ graph TD
     end
 ```
 
-## 📜 Stellar Blockchain Registry (Testnet)
+## 📜 Blockchain Protocol Registry (Testnet)
 
 | Item | Value |
 |------|-------|
-| **Network** | Stellar Testnet |
-| **Soroban Contract ID (Registry)** | `CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC` |
-| **Deployment Transaction Hash** | `e7e59b2ac99d4cae5d99b19e91776676565176af860269eb0c2616df03ce5` |
-| **Token Asset Code** | `SSWP` |
+| **Network** | Blockchain Testnet |
+| **Deployment Transaction Hash** | `Blockchain Testnet` |
+| **Token Asset Code** | `BSWP` |
 | **Token Issuer Address** | `GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM` |
 | **Liquidity Pool ID** | `f860269eb0c2616df03ce5e7e59b2ac99d4cae5d99b19e91776676565176af` |
 
@@ -65,7 +64,7 @@ graph TD
 
 - **Smart Contracts**: Soroban (Rust SDK v25.3.1)
 - **Frontend**: Next.js 14, TypeScript, Tailwind CSS
-- **Blockchain Interface**: Stellar SDK, @stellar/freighter-api
+- **Blockchain Interface**: Blockchain SDK, @stellar/freighter-api
 - **CI/CD**: GitHub Actions
 
 ## 🏃 Getting Started
@@ -78,7 +77,7 @@ graph TD
 ### 2. Local Setup
 ```bash
 # Clone the repository
-git clone https://github.com/greyparadox1337/stellarswap.git && cd stellarswap
+git clone https://github.com/greyparadox1337/blockchain-swap.git && cd blockchain-swap
 
 # Setup Frontend
 cd frontend && npm install
@@ -94,17 +93,18 @@ cargo test
 ```
 
 ## 🧪 CI/CD Pipeline
-StellarSwap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
+Blockchain Swap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
 - Rust toolchain (v1.81.0) compatibility.
 - successful WASM compilation for all contracts.
 - Frontend linting and type checking.
 
 ## 📄 License
 
-StellarSwap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+Blockchain Swap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
-  Built with ❤️ for the Stellar Community.
+  Built with ❤️ for the Blockchain Community.
 </div>
+# blockchain-swap

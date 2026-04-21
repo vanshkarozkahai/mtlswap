@@ -1,35 +1,90 @@
 "use client";
 
-import { useState } from "react";
-import { Coins, Loader2, CheckCircle2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Coins, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import GlassCard from "../shared/GlassCard";
 import StatusBadge from "../shared/StatusBadge";
 import { useAdmin } from "@/hooks/useAdmin";
-import { useStellar } from "@/hooks/useStellar";
+import { useBlockchain } from "@/hooks/useBlockchain";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
+import { ISSUER_ADDRESS } from "@/lib/blockchain";
+
+function RecipientStatus({ address }: { address: string }) {
+  const [status, setStatus] = useState<"checking" | "valid" | "invalid">("checking");
+  const { checkAssetTrust } = useBlockchain();
+
+  useEffect(() => {
+    const verify = async () => {
+      setStatus("checking");
+      try {
+        const hasTrust = await checkAssetTrust("TKNA", address);
+        setStatus(hasTrust ? "valid" : "invalid");
+      } catch {
+        setStatus("invalid");
+      }
+    };
+    if (address.length === 56) verify();
+  }, [address, checkAssetTrust]);
+
+  if (status === "checking") return <Loader2 className="animate-spin text-slate-300" size={16} />;
+  return status === "valid" ? (
+    <StatusBadge type="success">Trusted</StatusBadge>
+  ) : (
+    <StatusBadge type="error">No Trustline</StatusBadge>
+  );
+}
 
 export default function MintCard() {
   const { mintToken } = useAdmin();
-  const { checkAssetTrust } = useStellar();
+  const { address, checkAssetTrust } = useBlockchain();
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const MM_ADDRESS = "GCGUQ2F6LKRCD6PUDJKTVNGNEFVGJJPLBM7L64I5YFM7SBQGGXNXMVUM";
+  const isIssuer = address && address === ISSUER_ADDRESS;
+  const isNotIssuer = address && !isIssuer;
+
+  // Smart defaulting: If issuer is connected, point to Market Maker
+  useEffect(() => {
+    if (isIssuer && !recipient) {
+      setRecipient(MM_ADDRESS);
+    } else if (!address) {
+      setRecipient("");
+    }
+  }, [address, isIssuer, recipient]);
 
   const handleMint = async () => {
     if (!recipient || !amount) {
-      toast.error("Please fill in all fields");
+      toast.error("Please fill in recipient and amount");
       return;
     }
 
     setLoading(true);
     try {
-      // Step 1: Trustline Check
-      const hasTrust = await checkAssetTrust("TKNA");
-      if (!hasTrust) {
-        toast.error("Recipient lacks a trustline for TKNA");
-        setLoading(false);
-        return;
+      // Step 1: Trustline & Account Check
+      try {
+        const hasTrust = await checkAssetTrust("TKNA");
+        if (!hasTrust) {
+          toast.error("Recipient lacks trustline", {
+            description: "They must enable TKNA trustline first."
+          });
+          setLoading(false);
+          return;
+        }
+      } catch (e: any) {
+        if (e.response?.status === 404) {
+          toast.error("Account not funded", {
+            description: "The recipient wallet needs XLM to perform transactions on Testnet.",
+            action: {
+              label: "Get XLM",
+              onClick: () => window.open(`https://laboratory.stellar.org/#account-creator?public_key=${recipient}`, "_blank")
+            }
+          });
+          setLoading(false);
+          return;
+        }
       }
 
       await mintToken(recipient, amount);
@@ -38,14 +93,13 @@ export default function MintCard() {
       await fetch("/api/admin/logs", {
         method: "POST",
         body: JSON.stringify({
-          adminAddress: "TESTING_ADMIN",
+          adminAddress: address,
           action: "MINT",
           details: `Minted ${amount} TKNA to ${recipient}`,
-          txHash: "mint_sim_" + Math.random().toString(36).substring(7)
+          txHash: "tx_mint_" + Math.random().toString(36).substring(7)
         })
       });
 
-      toast.success("Tokens Minted Successfully!");
       confetti({
         particleCount: 100,
         spread: 70,
@@ -53,54 +107,76 @@ export default function MintCard() {
       });
       setAmount("");
     } catch (e) {
-      toast.error("Minting failed");
+      // Errors are handled by the useAdmin hook toasts
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <GlassCard className="p-8">
-      <div className="flex justify-between items-center mb-6">
+    <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-50 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
+      <div className="flex justify-between items-center mb-6 relative z-10">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-stellar-blue/10 rounded-2xl">
-            <Coins className="text-stellar-blue" />
+          <div className="p-3 bg-cyan-50 rounded-2xl">
+            <Coins className="text-brand-cyan" />
           </div>
           <div>
-            <h3 className="text-xl font-bold">Token Issuance</h3>
-            <p className="text-xs text-zinc-500">Mint protocol assets to any address</p>
+            <h3 className="text-xl font-bold text-slate-900">Token Issuance</h3>
+            <p className="text-xs text-slate-500 font-medium">Mint protocol assets to any authorized wallet</p>
           </div>
         </div>
         <StatusBadge type="info">Active</StatusBadge>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 relative z-10">
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 block">Recipient Address</label>
-          <input 
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Your Connected Address</label>
+          <div className="w-full bg-slate-50/50 border border-slate-100 rounded-2xl px-6 py-4 font-mono text-xs text-slate-400 overflow-hidden text-ellipsis">
+            {address || "Not Connected"}
+          </div>
+        </div>
+
+        <div className="relative group/input">
+           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Recipient Address</label>
+           <input 
             type="text"
             placeholder="G..."
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-stellar-blue transition-all font-mono text-sm"
+            className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-mono text-xs text-slate-900 pr-32"
           />
+          {recipient && recipient.length === 56 && (
+            <div className="absolute right-4 bottom-4">
+               <RecipientStatus address={recipient} />
+            </div>
+          )}
         </div>
 
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 block">Amount to Mint</label>
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Amount to Mint</label>
           <input 
             type="number"
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-stellar-blue transition-all font-bold text-lg"
+            className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-bold text-lg text-slate-900"
           />
         </div>
 
+        {isNotIssuer && (
+          <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex items-start gap-3">
+            <AlertCircle className="text-amber-600 shrink-0 mt-0.5" size={16} />
+            <div className="text-xs text-amber-700 leading-relaxed font-medium">
+              <strong>Non-Issuer Role:</strong> Only the primary issuing account can mint tokens. Please switch wallets if you need to create more supply.
+            </div>
+          </div>
+        )}
+
         <button
           onClick={handleMint}
-          disabled={loading}
-          className="w-full py-4 bg-stellar-blue text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(1,90,209,0.3)] transition-all active:scale-95 disabled:opacity-50"
+          disabled={loading || isNotIssuer}
+          className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 shadow-lg transition-all active:scale-[0.98] disabled:opacity-50"
         >
           {loading ? (
             <Loader2 className="animate-spin" size={20} />
@@ -111,6 +187,6 @@ export default function MintCard() {
           )}
         </button>
       </div>
-    </GlassCard>
+    </div>
   );
 }

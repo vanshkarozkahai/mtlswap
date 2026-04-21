@@ -1,24 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useStellar } from "./useStellar";
+import { useBlockchain } from "./useBlockchain";
 import { 
   TransactionBuilder, 
   Asset, 
   Operation, 
   BASE_FEE 
 } from "@stellar/stellar-sdk";
-import { horizonServer, ISSUER_ADDRESS, NETWORK_DETAILS } from "@/lib/stellar";
+import { horizonServer, ISSUER_ADDRESS, NETWORK_DETAILS } from "@/lib/blockchain";
 import { signWithFreighter } from "@/lib/freighter";
 import { toast } from "sonner";
 
 // For demo purposes, the first user or a specific test address can be admin
 const ADMIN_ADDRESSES = [
-  "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM",
+  "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM", // Issuer
+  "GCGUQ2F6LKRCD6PUDJKTVNGNEFVGJJPLBM7L64I5YFM7SBQGGXNXMVUM", // Market Maker
 ];
 
 export const useAdmin = () => {
-  const { address } = useStellar();
+  const { address } = useBlockchain();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -67,10 +68,26 @@ export const useAdmin = () => {
       const transaction = TransactionBuilder.fromXDR(signedXdr, NETWORK_DETAILS.networkPassphrase);
       const result = await horizonServer.submitTransaction(transaction);
 
+      toast.success("Tokens Minted Successfully!", { 
+        id: toastId,
+        description: `TX: ${result.hash.substring(0, 8)}...`
+      });
       return { status: "SUCCESS", hash: result.hash };
     } catch (e: any) {
       console.error("Issuance failed", e);
-      throw e;
+      
+      const data = e.response?.data;
+      const resultCodes = data?.extras?.result_codes;
+      let errorMsg = resultCodes 
+        ? `Stellar Error: ${resultCodes.transaction}${resultCodes.operations ? ` (${resultCodes.operations[0]})` : ""}`
+        : (data?.detail || e.message || "Minting failed");
+
+      if (e.response?.status === 404) {
+        errorMsg = "Account not found. Please fund your wallet with XLM via a faucet.";
+      }
+
+      toast.error(errorMsg, { id: toastId });
+      throw new Error(errorMsg);
     }
   };
 
@@ -79,20 +96,36 @@ export const useAdmin = () => {
     
     const toastId = toast.loading("Smart Seeding: Preparing liquidity & orders...");
     try {
+      // 0. Issuer check: Issuer cannot hold their own tokens to provide liquidity
+      if (address === ISSUER_ADDRESS) {
+        throw new Error("Seeding denied: You are connected as the Issuer. Please use a different admin account to provide liquidity.");
+      }
+
       const account = await horizonServer.loadAccount(address);
       const tknaAsset = new Asset("TKNA", ISSUER_ADDRESS);
       const xlmAsset = Asset.native();
+
+      // Diagnostic: Check balances
+      const xlmBalance = parseFloat(account.balances.find((b: any) => b.asset_type === "native")?.balance || "0");
+      const tknaBalance = parseFloat(account.balances.find((b: any) => b.asset_code === "TKNA")?.balance || "0");
+
+      if (xlmBalance < 105) {
+        throw new Error(`Insufficient XLM: You have ${xlmBalance} XLM, but need at least 105 XLM for the liquidity offers and reserves. Please use a faucet.`);
+      }
+
+      if (tknaBalance < 100) {
+        throw new Error(`Insufficient TKNA: You have ${tknaBalance} TKNA, but need 100 for the sell offer. Please Mint tokens from the Issuer first.`);
+      }
 
       const tx = new TransactionBuilder(account, {
         fee: BASE_FEE,
         networkPassphrase: NETWORK_DETAILS.networkPassphrase,
       })
-        // 1. Initial Mint: Ensure Admin actually has TKNA to fulfill the Sell Offer
+        // 1. Ensure Trustline: Needed for the non-issuer MM account to receive TKNA
         .addOperation(
-          Operation.payment({
-            destination: address,
+          Operation.changeTrust({
             asset: tknaAsset,
-            amount: "10000",
+            limit: "1000000"
           })
         )
         // 2. Offer: Sell TKNA for XLM (Providing TKNA liquidity)
@@ -100,8 +133,8 @@ export const useAdmin = () => {
           Operation.manageSellOffer({
             selling: tknaAsset,
             buying: xlmAsset,
-            amount: "5000",
-            price: "1.1", // Add a small spread for realism
+            amount: "100",
+            price: "2.0", // Sell 1 TKNA for 2 XLM
             offerId: "0" 
           })
         )
@@ -110,34 +143,112 @@ export const useAdmin = () => {
           Operation.manageSellOffer({
             selling: xlmAsset,
             buying: tknaAsset,
-            amount: "5000",
-            price: "0.9", // Spread
+            amount: "100",
+            price: "2.0", // Sell 1 XLM for 2 TKNA (Buy 1 TKNA for 0.5 XLM)
             offerId: "0"
           })
         )
-        .setTimeout(120) // Give more time for triple-op tx
+        .setTimeout(180) 
         .build();
 
-      toast.loading("Sign 'Smart Seed' (Mint + Orders) in Freighter", { id: toastId });
+      toast.loading("Sign 'Smart Seed' (Trust + Mint + Orders) in Freighter", { id: toastId });
       const signedXdr = await signWithFreighter(tx.toXDR(), NETWORK_DETAILS.network);
       
       if (!signedXdr) throw new Error("Transaction rejected");
 
-      toast.loading("Deploying liquidity to Stellar network...", { id: toastId });
+      toast.loading("Deploying liquidity to Blockchain network...", { id: toastId });
       const transaction = TransactionBuilder.fromXDR(signedXdr, NETWORK_DETAILS.networkPassphrase);
       const result = await horizonServer.submitTransaction(transaction);
 
       toast.success("DEX Market is Live!", { 
         id: toastId,
-        description: "Admin wallet funded & orderbook initialized successfully."
+        description: "Trustline enabled, account funded & orders initialized."
       });
       return { status: "SUCCESS", hash: result.hash };
     } catch (e: any) {
       console.error("Smart Seeding failed", e);
-      toast.error("Smart Seeding failed", { id: toastId, description: e.message || "Protocol level error" });
-      throw e;
+      
+      const data = e.response?.data;
+      const resultCodes = data?.extras?.result_codes;
+      
+      // LOG DETAILED ERROR FOR DEBUGGING
+      if (resultCodes) {
+        console.group("Stellar Transaction Failed");
+        console.error("Transaction Result Code:", resultCodes.transaction);
+        console.error("Operations Result Codes:", resultCodes.operations);
+        console.groupEnd();
+      }
+      
+      // Find the first failing operation result code
+      const opResult = resultCodes?.operations?.find((op: string) => op !== "op_success") || resultCodes?.operations?.[0];
+      
+      let errorMsg = resultCodes 
+        ? `Stellar Error: ${resultCodes.transaction}${opResult ? ` (${opResult})` : ""}`
+        : (data?.detail || e.message || "Smart Seeding failed");
+
+      if (e.response?.status === 404) {
+        errorMsg = "Account not found on network. Fund your wallet with XLM first.";
+      }
+      
+      toast.error(errorMsg, { id: toastId, description: "Check console for ledger details" });
+      throw new Error(errorMsg);
     }
   };
 
-  return { isAdmin, loading, mintToken, seedDEXLiquidity };
+  const initializeWallet = async () => {
+    if (!address) throw new Error("Wallet not connected");
+    
+    const toastId = toast.loading("Initializing Wallet: Creating trustline...");
+    try {
+      const account = await horizonServer.loadAccount(address);
+      const tknaAsset = new Asset("TKNA", ISSUER_ADDRESS);
+
+      const tx = new TransactionBuilder(account, {
+        fee: BASE_FEE,
+        networkPassphrase: NETWORK_DETAILS.networkPassphrase,
+      })
+        .addOperation(
+          Operation.changeTrust({
+            asset: tknaAsset,
+            limit: "1000000"
+          })
+        )
+        .setTimeout(30)
+        .build();
+
+      toast.loading("Please sign the trustline in Freighter", { id: toastId });
+      const signedXdr = await signWithFreighter(tx.toXDR(), NETWORK_DETAILS.network);
+      
+      if (!signedXdr) throw new Error("Transaction rejected");
+
+      toast.loading("Activating trustline on network...", { id: toastId });
+      const transaction = TransactionBuilder.fromXDR(signedXdr, NETWORK_DETAILS.networkPassphrase);
+      const result = await horizonServer.submitTransaction(transaction);
+
+      toast.success("Wallet Initialized!", { 
+        id: toastId,
+        description: "You are now ready to receive TKNA tokens."
+      });
+      return { status: "SUCCESS", hash: result.hash };
+    } catch (e: any) {
+      console.error("Initialization failed", e);
+      const data = e.response?.data;
+      const resultCodes = data?.extras?.result_codes;
+      const opResult = resultCodes?.operations?.find((op: string) => op !== "op_success") || resultCodes?.operations?.[0];
+      
+      let errorMsg = resultCodes 
+        ? `Stellar Error: ${resultCodes.transaction}${opResult ? ` (${opResult})` : ""}`
+        : (data?.detail || e.message || "Initialization failed");
+
+      if (e.response?.status === 404) {
+        errorMsg = "Account not found. Please fund with XLM first.";
+      }
+
+      toast.error(errorMsg, { id: toastId });
+      throw new Error(errorMsg);
+    }
+  };
+
+  return { isAdmin, loading, mintToken, seedDEXLiquidity, initializeWallet };
 };
+
