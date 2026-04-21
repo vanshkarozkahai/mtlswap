@@ -1,6 +1,6 @@
 # 🧪 Blockchain Swap
 
-![Blockchain Swap Hero Banner](assets/protocol-hub.png)
+![Blockchain Swap Hero Banner](screenshots/dashboard.png)
 
 <div align="center">
   <p><strong>Trade at the Speed of Blockchain. Atomic. Transparent. Interconnected.</strong></p>
@@ -26,9 +26,9 @@ Blockchain Swap is an institutional-grade Decentralized Exchange (DEX) protocol 
 
 ## 📱 Visual Showcase
 
-| Protocol Hub | Mobile Responsive View |
+| Main Trading Dashboard | Admin Protocol Hub |
 |:---:|:---:|
-| ![Protocol Hub](assets/protocol-hub.png) | ![Mobile View](assets/protocol-mobile.png) |
+| ![Trading Dashboard](screenshots/dashboard.png) | ![Admin Hub](screenshots/admin_hub.png) |
 
 ## 🏗️ Technical Architecture
 
@@ -77,7 +77,7 @@ graph TD
 ### 2. Local Setup
 ```bash
 # Clone the repository
-git clone https://github.com/greyparadox1337/blockchain-swap.git && cd blockchain-swap
+git clone https://github.com/Garvitk06/blockchain-swap.git && cd blockchain-swap
 
 # Setup Frontend
 cd frontend && npm install
@@ -107,4 +107,3 @@ Blockchain Swap is open-source software licensed under the **MIT License**. See 
 <div align="center">
   Built with ❤️ for the Blockchain Community.
 </div>
-# blockchain-swap
