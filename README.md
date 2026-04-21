@@ -52,13 +52,12 @@ graph TD
 
 ## 📜 Blockchain Protocol Registry (Testnet)
 
-| Item | Value |
-|------|-------|
-| **Network** | Blockchain Testnet |
-| **Deployment Transaction Hash** | `Blockchain Testnet` |
-| **Token Asset Code** | `BSWP` |
-| **Token Issuer Address** | `GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM` |
-| **Liquidity Pool ID** | `f860269eb0c2616df03ce5e7e59b2ac99d4cae5d99b19e91776676565176af` |
+| Item | Value | Verification |
+|------|-------|:---:|
+| **Network** | Blockchain Testnet | [View Network](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases) |
+| **Token Asset Code** | `BSWP` | - |
+| **Token Issuer Address** | `GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM` | [Verify on Explorer](https://stellar.expert/explorer/testnet/account/GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM) |
+| **Liquidity Pool ID** | `f860269eb0c26...176af` | [Verify Hub](https://stellar.expert/explorer/testnet/account/GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM) |
 
 ## 🛠️ Tech Stack
 
