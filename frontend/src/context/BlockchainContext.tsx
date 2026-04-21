@@ -135,7 +135,7 @@ export function BlockchainProvider({ children }: { children: ReactNode }) {
         await new Promise(r => setTimeout(r, 1500));
         
         // Wait and retry verification to handle Horizon delay
-        const verified = await checkAssetTrust(assetCode, 5);
+        const verified = await checkAssetTrust(assetCode, undefined, 5);
         if (verified) {
           toast.success(`${assetCode} Enabled!`, { id: toastId });
           return true;

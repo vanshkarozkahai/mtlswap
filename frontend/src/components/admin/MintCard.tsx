@@ -175,7 +175,7 @@ export default function MintCard() {
 
         <button
           onClick={handleMint}
-          disabled={loading || isNotIssuer}
+          disabled={!!(loading || isNotIssuer)}
           className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 shadow-lg transition-all active:scale-[0.98] disabled:opacity-50"
         >
           {loading ? (

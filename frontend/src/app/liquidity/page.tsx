@@ -65,7 +65,7 @@ export default function LiquidityPage() {
       }
       const success = await setupTrustline("TKNA");
       if (success) {
-        const trusted = await checkAssetTrust("TKNA", 5);
+        const trusted = await checkAssetTrust("TKNA", undefined, 5);
         setHasTrustB(trusted);
         refreshBalances();
       }

@@ -97,7 +97,7 @@ export default function SwapPage() {
       const success = await setupTrustline(buyToken.symbol);
       if (success) {
         // Re-verify trustline state after successful setup (with retries for Horizon)
-        const trusted = await checkAssetTrust(buyToken.symbol, 5);
+        const trusted = await checkAssetTrust(buyToken.symbol, undefined, 5);
         setHasTrust(trusted);
         refreshBalances();
       }
