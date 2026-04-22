@@ -16,9 +16,9 @@ export const NETWORK_DETAILS = {
 export const ISSUER_ADDRESS = "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM";
 
 export const CONTRACT_IDS = {
-  token: process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ID || "CC...",
+  token: process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ID || "CCPQ2RMOWJ6ZPNOPTT63RPR6QICCQMETFBYQTWJIVVZL6U2LV6W4QMZM",
   pool: process.env.NEXT_PUBLIC_POOL_CONTRACT_ID || "CC...",
-  router: process.env.NEXT_PUBLIC_ROUTER_CONTRACT_ID || "CC...",
+  router: process.env.NEXT_PUBLIC_ROUTER_CONTRACT_ID || "CBNKNOG37YHDBIAZDMDDLR2CVZ2KVJKASOM2APWSIFZ5ECGIRS3A6B55",
 };
 
 export const checkTrustline = async (address: string, assetCode: string, retries = 1) => {
