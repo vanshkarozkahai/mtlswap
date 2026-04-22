@@ -38,7 +38,7 @@ export const useSwap = () => {
         const formattedIn = decAmountIn.slice(0, -7) + "." + decAmountIn.slice(-7);
         
         // Ensure minOut is at least 1 stroop (0.0000001) — destMin=0 causes op_malformed
-        const minOutBigInt = BigInt(minOut) > 0n ? BigInt(minOut) : 1n;
+        const minOutBigInt = BigInt(minOut) > BigInt(0) ? BigInt(minOut) : BigInt(1);
         const decMinOut = (minOutBigInt.toString().padStart(8, '0'));
         const formattedOut = decMinOut.slice(0, -7) + "." + decMinOut.slice(-7);
 
