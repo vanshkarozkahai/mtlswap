@@ -1,11 +1,11 @@
-# Design Specification: Flare Swap "Stealth Glass" Theme
+# Design Specification: AuraSwap "Atmospheric Pulse" Theme
 
 ## Overview
-This document outlines the architectural and design decisions for the "Stealth Glass" theme overhaul of Flare Swap.
+This document outlines the architectural and design decisions for the "Atmospheric Pulse" theme overhaul of AuraSwap.
 
 ## Visual Identity
 - **Background**: Absolute Black (`#000000`). No gradients or secondary background colors.
-- **Aesthetic**: "Stealth Glass" - characterized by high-depth transparency, subtle borders, and vibrant neon accents.
+- **Aesthetic**: "Atmospheric Pulse" - characterized by high-depth transparency, subtle borders, and vibrant neon accents.
 
 ## Design Tokens
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutDashboard, Lock, ShieldAlert } from "lucide-react";
+import { LayoutDashboard, Lock, ShieldAlert, Activity } from "lucide-react";
 import Navbar from "@/components/landing/Navbar";
 import { useAdmin } from "@/hooks/useAdmin";
 import MintCard from "@/components/admin/MintCard";
