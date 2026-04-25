@@ -17,8 +17,8 @@ export default function PreflightCheck() {
   ];
 
   return (
-    <GlassCard className="p-8 bg-white border-slate-200">
-      <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-900">
+    <GlassCard className="p-8 bg-black border-white/10">
+      <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-slate-50">
         Protocol Health 
         <StatusBadge type="live">
           Blockchain Testnet Live
@@ -27,12 +27,12 @@ export default function PreflightCheck() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {checks.map((check) => (
-          <div key={check.name} className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+          <div key={check.name} className="p-4 rounded-2xl bg-black border border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-cyan-50 rounded-xl">
+              <div className="p-2 bg-cyan-950/20 rounded-xl">
                 <check.icon size={18} className="text-brand-cyan" />
               </div>
-              <span className="text-sm font-medium text-slate-700">{check.name}</span>
+              <span className="text-sm font-medium text-slate-400">{check.name}</span>
             </div>
             <span className="text-[10px] font-bold uppercase tracking-widest flex-shrink-0 ml-2 text-emerald-600">{check.status}</span>
           </div>

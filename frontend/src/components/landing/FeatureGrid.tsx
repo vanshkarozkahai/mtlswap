@@ -29,9 +29,9 @@ export default function FeatureGrid() {
   return (
     <section id="features" className="py-24 max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">Core Protocol Features</h2>
-        <p className="text-slate-500 max-w-xl mx-auto text-lg">
-          Blockchain Swap leverages the full potential of Soroban to bring institutional-grade DeFi to the Blockchain network.
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-50">Pulse of the Protocol</h2>
+        <p className="text-slate-400 max-w-xl mx-auto text-lg">
+          AuraSwap leverages the full potential of Soroban to bring institutional-grade DeFi to the Blockchain network.
         </p>
       </div>
 
@@ -43,13 +43,13 @@ export default function FeatureGrid() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className={`bg-white border border-slate-100 hover:border-brand-cyan/30 hover:shadow-xl hover:shadow-cyan-500/5 p-8 rounded-[32px] group transition-all ${f.className}`}
+            className={`bg-black border border-white/10 hover:border-brand-cyan/30 hover:shadow-xl hover:shadow-cyan-500/5 p-8 rounded-[32px] group transition-all ${f.className}`}
           >
-            <div className="w-12 h-12 rounded-2xl bg-cyan-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <div className="w-12 h-12 rounded-2xl bg-cyan-950/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               {React.cloneElement(f.icon as React.ReactElement, { className: "text-brand-cyan" })}
             </div>
-            <h3 className="text-2xl font-bold mb-3 text-slate-900">{f.title}</h3>
-            <p className="text-slate-500 leading-relaxed text-sm md:text-base">
+            <h3 className="text-2xl font-bold mb-3 text-slate-50">{f.title}</h3>
+            <p className="text-slate-400 leading-relaxed text-sm md:text-base">
               {f.desc}
             </p>
           </motion.div>

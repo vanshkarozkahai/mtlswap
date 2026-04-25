@@ -12,7 +12,8 @@ const config: Config = {
         brand: {
           cyan: "#06b6d4",
           blue: "#0284c7",
-          slate: "#0f172a",
+          slate: "#020617",
+          black: "#000000",
         },
       },
     },

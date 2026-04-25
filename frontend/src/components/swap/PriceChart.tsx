@@ -26,11 +26,11 @@ export default function PriceChart() {
       <div className="flex justify-between items-center mb-6 px-2">
         <div>
           <div className="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">XLM / TKNA</div>
-          <div className="text-2xl font-bold text-slate-900">0.132 <span className="text-xs text-emerald-500 font-normal ml-1">+2.4%</span></div>
+          <div className="text-2xl font-bold text-slate-50">0.132 <span className="text-xs text-emerald-500 font-normal ml-1">+2.4%</span></div>
         </div>
         <div className="flex gap-1">
           {["1H", "1D", "1W"].map(t => (
-            <button key={t} className={`px-2 py-1 rounded-md text-[10px] font-bold transition-colors ${t === "1D" ? "bg-brand-cyan text-white shadow-sm" : "hover:bg-slate-50 text-slate-400"}`}>
+            <button key={t} className={`px-2 py-1 rounded-md text-[10px] font-bold transition-colors ${t === "1D" ? "bg-brand-cyan text-white shadow-sm" : "hover:bg-black text-slate-400"}`}>
               {t}
             </button>
           ))}

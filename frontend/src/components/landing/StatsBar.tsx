@@ -11,7 +11,7 @@ const stats = [
 
 export default function StatsBar() {
   return (
-    <div id="stats" className="py-12 border-y border-white/5 bg-white/[0.02]">
+    <div id="stats" className="py-12 border-y border-white/5 bg-black/[0.02]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
         {stats.map((stat, i) => (
           <motion.div 

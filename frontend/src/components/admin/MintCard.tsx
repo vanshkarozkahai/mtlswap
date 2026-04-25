@@ -114,16 +114,16 @@ export default function MintCard() {
   };
 
   return (
-    <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-50 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
+    <div className="bg-black p-8 rounded-[32px] border border-white/10 shadow-sm relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-950/20 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
       <div className="flex justify-between items-center mb-6 relative z-10">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-cyan-50 rounded-2xl">
+          <div className="p-3 bg-cyan-950/20 rounded-2xl">
             <Coins className="text-brand-cyan" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-slate-900">Token Issuance</h3>
-            <p className="text-xs text-slate-500 font-medium">Mint protocol assets to any authorized wallet</p>
+            <h3 className="text-xl font-bold text-slate-50">Token Issuance</h3>
+            <p className="text-xs text-slate-400 font-medium">Mint protocol assets to any authorized wallet</p>
           </div>
         </div>
         <StatusBadge type="info">Active</StatusBadge>
@@ -132,7 +132,7 @@ export default function MintCard() {
       <div className="space-y-4 relative z-10">
         <div>
           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Your Connected Address</label>
-          <div className="w-full bg-slate-50/50 border border-slate-100 rounded-2xl px-6 py-4 font-mono text-xs text-slate-400 overflow-hidden text-ellipsis">
+          <div className="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-4 font-mono text-xs text-slate-400 overflow-hidden text-ellipsis">
             {address || "Not Connected"}
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function MintCard() {
             placeholder="G..."
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-mono text-xs text-slate-900 pr-32"
+            className="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-mono text-xs text-slate-50 pr-32"
           />
           {recipient && recipient.length === 56 && (
             <div className="absolute right-4 bottom-4">
@@ -160,14 +160,14 @@ export default function MintCard() {
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-bold text-lg text-slate-900"
+            className="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-bold text-lg text-slate-50"
           />
         </div>
 
         {isNotIssuer && (
-          <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex items-start gap-3">
-            <AlertCircle className="text-amber-600 shrink-0 mt-0.5" size={16} />
-            <div className="text-xs text-amber-700 leading-relaxed font-medium">
+          <div className="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-4 flex items-start gap-3">
+            <AlertCircle className="text-amber-400 shrink-0 mt-0.5" size={16} />
+            <div className="text-xs text-amber-400 leading-relaxed font-medium">
               <strong>Non-Issuer Role:</strong> Only the primary issuing account can mint tokens. Please switch wallets if you need to create more supply.
             </div>
           </div>

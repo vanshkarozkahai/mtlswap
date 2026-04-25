@@ -72,7 +72,7 @@ export default function PoolAnalyticsPage() {
   ];
 
   return (
-    <div className="bg-white min-h-screen text-slate-900 pt-32 pb-20 selection:bg-brand-cyan/20">
+    <div className="bg-black min-h-screen text-slate-50 pt-32 pb-20 selection:bg-brand-cyan/20">
       <Navbar />
       <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.05),transparent_70%)] pointer-events-none" />
 
@@ -83,9 +83,9 @@ export default function PoolAnalyticsPage() {
           <div>
             <div className="flex items-center gap-3 mb-2">
                <Activity className="text-brand-cyan" size={32} />
-               <h1 className="text-4xl font-bold tracking-tight text-slate-900">Protocol Analytics</h1>
+               <h1 className="text-4xl font-bold tracking-tight text-slate-50">Protocol Analytics</h1>
             </div>
-            <p className="text-slate-500 font-medium max-w-lg">
+            <p className="text-slate-400 font-medium max-w-lg">
               Explore the health and performance of the XLM/TKNA liquidity pool in real-time.
             </p>
           </div>
@@ -100,22 +100,22 @@ export default function PoolAnalyticsPage() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
            {stats.map((stat, i) => (
-             <GlassCard key={i} className="p-6 bg-white border-slate-200">
+             <GlassCard key={i} className="p-6 bg-black border-white/10">
                 <div className="flex justify-between items-start mb-4">
-                   <div className={`p-2 rounded-xl bg-slate-50 ${stat.label === '24H Volume' ? 'text-emerald-500' : 'text-brand-cyan'}`}>
+                   <div className={`p-2 rounded-xl bg-black ${stat.label === '24H Volume' ? 'text-emerald-500' : 'text-brand-cyan'}`}>
                       <stat.icon size={20} />
                    </div>
                    <span className="text-[10px] font-bold text-emerald-600 font-mono tracking-tight">{stat.change}</span>
                 </div>
                 <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">{stat.label}</div>
-                <div className="text-2xl font-bold font-mono text-slate-900">{stat.val}</div>
+                <div className="text-2xl font-bold font-mono text-slate-50">{stat.val}</div>
              </GlassCard>
            ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
            {/* TVL Chart */}
-           <GlassCard className="p-8 h-[400px] flex flex-col bg-white border-slate-200">
+           <GlassCard className="p-8 h-[400px] flex flex-col bg-black border-white/10">
               <div className="flex justify-between items-center mb-8">
                  <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-widest text-slate-400">
                     <LineChartIcon size={16} /> Total Value Locked
@@ -134,7 +134,7 @@ export default function PoolAnalyticsPage() {
            </GlassCard>
 
            {/* Volume Chart */}
-           <GlassCard className="p-8 h-[400px] flex flex-col bg-white border-slate-200">
+           <GlassCard className="p-8 h-[400px] flex flex-col bg-black border-white/10">
               <div className="flex justify-between items-center mb-8">
                  <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-widest text-slate-400">
                     <BarChart3 size={16} /> 24H Volume
@@ -154,9 +154,9 @@ export default function PoolAnalyticsPage() {
         </div>
 
         {/* Protocol Feed */}
-        <GlassCard className="overflow-hidden bg-white border-slate-200">
-           <div className="p-8 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-bold flex items-center gap-2 tracking-tight text-slate-900">
+        <GlassCard className="overflow-hidden bg-black border-white/10">
+           <div className="p-8 border-b border-white/10 flex items-center justify-between">
+              <h3 className="font-bold flex items-center gap-2 tracking-tight text-slate-50">
                  <History size={20} className="text-brand-cyan" />
                  Global Protocol Events
               </h3>
@@ -164,7 +164,7 @@ export default function PoolAnalyticsPage() {
            </div>
            <div className="overflow-x-auto">
               <table className="w-full text-left">
-                 <thead className="text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100">
+                 <thead className="text-[10px] uppercase font-bold text-slate-400 border-b border-white/10">
                     <tr>
                        <th className="p-6">Action</th>
                        <th className="p-6">Contract</th>
@@ -179,18 +179,18 @@ export default function PoolAnalyticsPage() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           key={e.id} 
-                          className="border-b border-slate-50 hover:bg-slate-50 transition-colors group"
+                          className="border-b border-slate-50 hover:bg-black transition-colors group"
                        >
                           <td className="p-6">
                              <StatusBadge type={e.type === 'swap' ? 'live' : e.type === 'deposit' ? 'success' : 'info'}>
                                 {e.type.toUpperCase()}
                              </StatusBadge>
                           </td>
-                          <td className="p-6 text-slate-500 font-mono text-[10px]">{e.contractId.slice(0, 12)}...</td>
-                          <td className="p-6 text-right font-medium text-slate-900">
+                          <td className="p-6 text-slate-400 font-mono text-[10px]">{e.contractId.slice(0, 12)}...</td>
+                          <td className="p-6 text-right font-medium text-slate-50">
                              {e.type === 'swap' ? `${Number(e.data.amountIn)/1e7} → ${Number(e.data.amountOut)/1e7}` : "Protocol Call"}
                           </td>
-                          <td className="p-6 text-right font-mono text-slate-500">{e.user.slice(0, 6)}...{e.user.slice(-4)}</td>
+                          <td className="p-6 text-right font-mono text-slate-400">{e.user.slice(0, 6)}...{e.user.slice(-4)}</td>
                           <td className="p-6 text-right font-mono text-slate-400">{e.ledger}</td>
                        </motion.tr>
                     ))}

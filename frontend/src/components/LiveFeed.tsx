@@ -42,7 +42,7 @@ export default function LiveFeed() {
     return (
       <button 
         onClick={() => setIsCollapsed(false)}
-        className="fixed top-24 right-4 md:right-6 bg-white p-3 rounded-full hover:scale-110 active:scale-95 transition-all z-[100] shadow-xl border border-slate-200"
+        className="fixed top-24 right-4 md:right-6 bg-black p-3 rounded-full hover:scale-110 active:scale-95 transition-all z-[100] shadow-xl border border-white/10"
       >
         <Radio size={20} className={isConnected ? "text-brand-cyan animate-pulse" : "text-slate-400"} />
       </button>
@@ -50,8 +50,8 @@ export default function LiveFeed() {
   }
 
   return (
-    <div className="fixed top-24 right-4 md:right-6 w-[280px] md:w-[320px] max-h-[calc(100vh-140px)] bg-white/90 backdrop-blur-xl rounded-3xl z-[100] flex flex-col shadow-2xl border border-slate-200">
-      <div className="p-4 border-b border-slate-100 flex items-center justify-between">
+    <div className="fixed top-24 right-4 md:right-6 w-[280px] md:w-[320px] max-h-[calc(100vh-140px)] bg-black/90 backdrop-blur-xl rounded-3xl z-[100] flex flex-col shadow-2xl border border-white/10">
+      <div className="p-4 border-b border-white/10 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full ${isConnected ? "bg-brand-cyan animate-pulse" : "bg-slate-300"}`} />
           <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Blockchain Feed</span>
@@ -59,11 +59,11 @@ export default function LiveFeed() {
         <div className="flex items-center gap-1">
           <button 
             onClick={() => setIsSoundEnabled(!isSoundEnabled)}
-            className={`p-1.5 rounded-lg transition-colors ${isSoundEnabled ? "text-brand-cyan bg-cyan-50" : "text-slate-400 hover:bg-slate-50"}`}
+            className={`p-1.5 rounded-lg transition-colors ${isSoundEnabled ? "text-brand-cyan bg-cyan-950/20" : "text-slate-400 hover:bg-black"}`}
           >
              <Radio size={14} />
           </button>
-          <button onClick={() => setIsCollapsed(true)} className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-400">
+          <button onClick={() => setIsCollapsed(true)} className="p-1.5 hover:bg-black rounded-lg text-slate-400">
             <X size={16} />
           </button>
         </div>
@@ -80,7 +80,7 @@ export default function LiveFeed() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-cyan/30 transition-colors group relative overflow-hidden"
+                className="p-3 rounded-2xl bg-black border border-white/10 hover:border-brand-cyan/30 transition-colors group relative overflow-hidden"
               >
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex items-center gap-2">
@@ -104,9 +104,9 @@ export default function LiveFeed() {
                 
                 <div className="flex flex-col gap-1">
                   <div className="text-[10px] font-mono text-slate-400">
-                    User: <span className="text-slate-900">{event.user.slice(0, 6)}...{event.user.slice(-4)}</span>
+                    User: <span className="text-slate-50">{event.user.slice(0, 6)}...{event.user.slice(-4)}</span>
                   </div>
-                  <div className="text-xs font-bold truncate text-slate-900">
+                  <div className="text-xs font-bold truncate text-slate-50">
                     {event.type === 'swap' ? (
                        <span>{Number(event.data.amountIn) / 1e7} XLM → {Number(event.data.amountOut) / 1e7} BSWP</span>
                     ) : event.type === 'deposit' ? (
@@ -127,7 +127,7 @@ export default function LiveFeed() {
         </AnimatePresence>
       </div>
 
-      <div className="p-3 bg-slate-50/50 border-t border-slate-100 text-center">
+      <div className="p-3 bg-black/50 border-t border-white/10 text-center">
          <p className="text-[9px] text-slate-400 font-mono italic">Subscribed to Network getEvents</p>
       </div>
     </div>

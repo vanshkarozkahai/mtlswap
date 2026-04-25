@@ -1,11 +1,11 @@
-# 🧪 Blockchain Swap
+# 🧪 AuraSwap
 
-![Blockchain Swap Hero Banner](screenshots/dashboard.png)
+![AuraSwap Hero Banner](screenshots/dashboard.png)
 
 <div align="center">
   <p><strong>Trade at the Speed of Blockchain. Atomic. Transparent. Interconnected.</strong></p>
   
-  [![Blockchain Swap CI](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml)
+  [![AuraSwap CI](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml)
   [![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat&logo=vercel)](https://blockchain-swap-frontend.vercel.app/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
   [![Network: Testnet](https://img.shields.io/badge/Network-Testnet-cyan.svg)](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases)
@@ -15,30 +15,27 @@
 
 ### 🚀 [Live Demo](https://blockchain-swap-frontend.vercel.app/)
 
-Blockchain Swap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
+AuraSwap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
 
 ## ✨ Features
 
 - **Atomic Multi-Contract Execution**: Uses a dedicated Router contract to coordinate swaps across Token and Pool contracts in a single transaction.
 - **AMM Constant Product Formula**: Implements $x \times y = k$ logic with a 0.3% protocol fee for liquidity providers.
 - **Real-Time Event Streaming**: Sub-second trade awareness powered by Network event polling.
-- **Premium Light Theme UI**: High-fidelity trading desk built with Next.js 14, Framer Motion, and Tailwind CSS.
-- **White and Cyan Aesthetics**: Professional light-themed design system with clean interfaces and vibrant accents.
+- **Premium Solid Black UI**: High-fidelity trading desk built with Next.js 14, Framer Motion, and Tailwind CSS.
+- **Black and Cyan Aesthetics**: Professional light-themed design system with clean interfaces and vibrant accents.
 
 ## 📱 Visual Showcase
 
-| Main Trading Dashboard | Admin Protocol Hub |
+| Main Trading Dashboard | Mobile Interface & Health |
 |:---:|:---:|
-| ![Trading Dashboard](screenshots/dashboard.png) | ![Admin Hub](screenshots/admin_hub.png) |
+| ![AuraSwap Dashboard](screenshots/dashboard_desktop.png) | ![AuraSwap Mobile](screenshots/swap_mobile.png) |
 
-## 📺 Demo Video
-
-https://github.com/Garvitk06/blockchain-swap/raw/main/videos/demo.mov
 
 
 ## 🏗️ Technical Architecture
 
-Blockchain Swap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
+AuraSwap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
 
 ```mermaid
 graph TD
@@ -100,14 +97,14 @@ cargo test
 ```
 
 ## 🧪 CI/CD Pipeline
-Blockchain Swap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
+AuraSwap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
 - Rust toolchain (v1.81.0) compatibility.
 - successful WASM compilation for all contracts.
 - Frontend linting and type checking.
 
 ## 📄 License
 
-Blockchain Swap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+AuraSwap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 

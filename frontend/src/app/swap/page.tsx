@@ -169,11 +169,11 @@ export default function SwapPage() {
   const getImpactColor = (impact: number) => {
     if (impact < 1) return "text-green-500";
     if (impact < 3) return "text-yellow-500";
-    return "text-red-500";
+    return "text-red-400";
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen text-slate-900 pt-24 pb-12 selection:bg-brand-cyan/20">
+    <div className="bg-black min-h-screen text-slate-50 pt-24 pb-12 selection:bg-brand-cyan/20">
       <Navbar />
       <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.08),transparent_70%)] pointer-events-none" />
 
@@ -181,25 +181,25 @@ export default function SwapPage() {
         
         {/* Left Side: Chart & Info */}
         <div className="hidden lg:flex lg:col-span-3 flex-col gap-6">
-          <div className="bg-white border border-slate-200 p-6 rounded-[32px] h-[350px] shadow-sm">
+          <div className="bg-black border border-white/10 p-6 rounded-[32px] h-[350px] shadow-sm">
             <PriceChart />
           </div>
-          <div className="bg-white border border-slate-200 p-6 rounded-[32px] shadow-sm">
+          <div className="bg-black border border-white/10 p-6 rounded-[32px] shadow-sm">
             <h3 className="flex items-center gap-2 font-bold mb-4 text-sm uppercase tracking-widest text-slate-400">
                <Info size={16} className="text-brand-cyan" /> Pool Info
             </h3>
             <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                   <span className="text-slate-500">Liquidity</span>
-                   <span className="font-mono text-slate-900 font-semibold">$2.4M</span>
+                   <span className="text-slate-400">Liquidity</span>
+                   <span className="font-mono text-slate-50 font-semibold">$2.4M</span>
                 </div>
                 <div className="flex justify-between">
-                   <span className="text-slate-500">Vol 24H</span>
-                   <span className="font-mono text-slate-900 font-semibold">$482k</span>
+                   <span className="text-slate-400">Vol 24H</span>
+                   <span className="font-mono text-slate-50 font-semibold">$482k</span>
                 </div>
                 <div className="flex justify-between">
-                   <span className="text-slate-500">Fees 24H</span>
-                   <span className="font-mono text-slate-900 font-semibold">$1.4k</span>
+                   <span className="text-slate-400">Fees 24H</span>
+                   <span className="font-mono text-slate-50 font-semibold">$1.4k</span>
                 </div>
             </div>
           </div>
@@ -207,16 +207,16 @@ export default function SwapPage() {
 
         <div className="lg:col-span-6 flex flex-col gap-6 justify-center items-start pt-0 lg:pt-8">
           <PreflightCheck />
-          <GlassCard className="w-full max-w-[480px] p-8 shadow-2xl relative bg-white border-slate-200">
+          <GlassCard className="w-full max-w-[480px] p-8 shadow-2xl relative bg-black border-white/10">
             {/* Header */}
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-bold text-slate-900">Swap</h2>
+              <h2 className="text-2xl font-bold text-slate-50">Swap</h2>
               <div className="flex gap-2">
                 <button 
                   onClick={() => setIsSlippageOpen(true)}
-                  className="p-3 bg-slate-100 hover:bg-slate-200 rounded-2xl transition-all"
+                  className="p-3 bg-white/10 hover:bg-white/20 rounded-2xl transition-all"
                 >
-                  <Settings2 size={20} className="text-slate-500" />
+                  <Settings2 size={20} className="text-slate-400" />
                 </button>
               </div>
             </div>
@@ -224,11 +224,11 @@ export default function SwapPage() {
             {/* Inputs */}
             <div className="space-y-2 relative">
               {/* From */}
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 group hover:border-brand-cyan/20 transition-all">
+              <div className="p-6 rounded-3xl bg-black border border-white/10 group hover:border-brand-cyan/20 transition-all">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">You Pay</span>
                   <div className="text-[10px] font-medium text-slate-400">
-                    Balance: <span className="text-slate-600 font-semibold">{balances[sellToken.symbol as keyof typeof balances] || 0}</span>
+                    Balance: <span className="text-slate-400 font-semibold">{balances[sellToken.symbol as keyof typeof balances] || 0}</span>
                     <button 
                       onClick={() => setSellAmount((balances[sellToken.symbol as keyof typeof balances] || 0).toString())}
                       className="ml-2 text-brand-cyan uppercase font-bold hover:text-cyan-600 transition-colors"
@@ -243,14 +243,14 @@ export default function SwapPage() {
                     placeholder="0.00"
                     value={sellAmount}
                     onChange={(e) => setSellAmount(e.target.value)}
-                    className="bg-transparent text-4xl font-bold outline-none w-full placeholder:text-slate-200 text-slate-900"
+                    className="bg-transparent text-4xl font-bold outline-none w-full placeholder:text-slate-200 text-slate-50"
                   />
                   <button 
                     onClick={() => { setSelectorTarget("sell"); setIsTokenSelectorOpen(true); }}
-                    className="flex items-center gap-2 bg-white hover:bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200 shadow-sm transition-all active:scale-95"
+                    className="flex items-center gap-2 bg-black hover:bg-black px-4 py-2 rounded-2xl border border-white/10 shadow-sm transition-all active:scale-95"
                   >
                     <span className="text-xl">{sellToken.logo}</span>
-                    <span className="font-bold text-slate-900">{sellToken.symbol}</span>
+                    <span className="font-bold text-slate-50">{sellToken.symbol}</span>
                     <ChevronDown size={16} className="text-slate-400" />
                   </button>
                 </div>
@@ -266,18 +266,18 @@ export default function SwapPage() {
                     setSellToken(buyToken);
                     setBuyToken(temp);
                   }}
-                  className="p-3 rounded-2xl bg-white border border-slate-200 text-brand-cyan shadow-lg hover:border-brand-cyan/30 transition-all"
+                  className="p-3 rounded-2xl bg-black border border-white/10 text-brand-cyan shadow-lg hover:border-brand-cyan/30 transition-all"
                 >
-                  <ArrowLeftRight size={20} />
+                  <Activity size={20} />
                 </motion.button>
               </div>
 
               {/* To */}
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 group hover:border-brand-cyan/20 transition-all pt-8">
+              <div className="p-6 rounded-3xl bg-black border border-white/10 group hover:border-brand-cyan/20 transition-all pt-8">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">You Receive</span>
                   <div className="text-[10px] font-medium text-slate-400">
-                    Balance: <span className="text-slate-600 font-semibold">{(balances[buyToken.symbol as keyof typeof balances] || 0).toLocaleString()}</span>
+                    Balance: <span className="text-slate-400 font-semibold">{(balances[buyToken.symbol as keyof typeof balances] || 0).toLocaleString()}</span>
                     {buyToken.symbol === "TKNA" && (balances[buyToken.symbol as keyof typeof balances] || 0) === 0 && (
                       <button 
                         onClick={async () => {
@@ -296,7 +296,7 @@ export default function SwapPage() {
                   </div>
                 </div>
                 <div className="flex justify-between items-center gap-4">
-                  <div className="text-4xl font-bold w-full truncate h-10 flex items-center text-slate-900">
+                  <div className="text-4xl font-bold w-full truncate h-10 flex items-center text-slate-50">
                     {isQuoting ? (
                       <Loader2 className="animate-spin text-brand-cyan" size={24} />
                     ) : buyAmount ? (
@@ -307,10 +307,10 @@ export default function SwapPage() {
                   </div>
                   <button 
                     onClick={() => { setSelectorTarget("buy"); setIsTokenSelectorOpen(true); }}
-                    className="flex items-center gap-2 bg-white hover:bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200 shadow-sm transition-all active:scale-95"
+                    className="flex items-center gap-2 bg-black hover:bg-black px-4 py-2 rounded-2xl border border-white/10 shadow-sm transition-all active:scale-95"
                   >
                     <span className="text-xl">{buyToken.logo}</span>
-                    <span className="font-bold text-slate-900">{buyToken.symbol}</span>
+                    <span className="font-bold text-slate-50">{buyToken.symbol}</span>
                     <ChevronDown size={16} className="text-slate-400" />
                   </button>
                 </div>
@@ -326,17 +326,17 @@ export default function SwapPage() {
                   exit={{ height: 0, opacity: 0 }}
                   className="mt-6 space-y-3 overflow-hidden text-xs"
                 >
-                   <div className="flex justify-between items-center text-slate-500">
+                   <div className="flex justify-between items-center text-slate-400">
                       <span>Exchange Rate</span>
-                      <span className="font-mono text-slate-700">
+                      <span className="font-mono text-slate-400">
                         {isQuoting ? "..." : `1 ${sellToken.symbol} = ${(parseFloat(buyAmount) / (parseFloat(sellAmount) || 1)).toFixed(4)} ${buyToken.symbol}`}
                       </span>
                    </div>
-                   <div className="flex justify-between items-center text-slate-500">
+                   <div className="flex justify-between items-center text-slate-400">
                       <span>Price Impact</span>
                       <span className={`font-mono font-semibold ${getImpactColor(priceImpact)}`}>{poolLoading ? "..." : `${priceImpact.toFixed(2)}%`}</span>
                    </div>
-                   <div className="flex justify-between items-center text-slate-500">
+                   <div className="flex justify-between items-center text-slate-400">
                       <span>Slippage Tolerance</span>
                       <span className="font-mono text-brand-cyan font-semibold">{slippage}%</span>
                    </div>
@@ -351,7 +351,7 @@ export default function SwapPage() {
               className={`w-full py-5 rounded-[24px] font-bold text-lg mt-8 transition-all flex items-center justify-center gap-2 group overflow-hidden relative ${
                 address 
                   ? "bg-brand-cyan text-white shadow-[0_10px_20px_-5px_rgba(6,182,212,0.3)] hover:shadow-[0_10px_30px_-5px_rgba(6,182,212,0.5)] active:scale-[0.98]" 
-                  : "bg-slate-900 text-white hover:bg-slate-800"
+                  : "bg-white/10 text-slate-400 hover:bg-white/20"
               }`}
             >
               <span className="z-10 flex items-center gap-2">
@@ -389,15 +389,15 @@ export default function SwapPage() {
 
         {/* Right Side: Feed */}
         <div className="hidden lg:flex lg:col-span-3 flex-col gap-6">
-           <div className="bg-white border border-slate-200 h-full rounded-[32px] overflow-hidden flex flex-col shadow-sm">
-              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-                <h3 className="font-bold flex items-center gap-2 text-sm text-slate-900">
+           <div className="bg-black border border-white/10 h-full rounded-[32px] overflow-hidden flex flex-col shadow-sm">
+              <div className="p-6 border-b border-white/10 flex items-center justify-between">
+                <h3 className="font-bold flex items-center gap-2 text-sm text-slate-50">
                    <Activity size={18} className="text-brand-cyan" /> Live Activity
                 </h3>
               </div>
               <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                  {events.map((e) => (
-                    <div key={e.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-cyan/20 transition-all">
+                    <div key={e.id} className="p-4 rounded-2xl bg-black border border-white/10 hover:border-brand-cyan/20 transition-all">
                        <div className="flex justify-between text-[10px] mb-2">
                           <span className={`font-bold ${
                             e.type === 'swap' ? 'text-brand-cyan' : 
@@ -405,7 +405,7 @@ export default function SwapPage() {
                           }`}>{e.type.toUpperCase()}</span>
                           <span className="text-slate-400 font-mono">NEW</span>
                        </div>
-                       <div className="text-xs font-semibold text-slate-700">
+                       <div className="text-xs font-semibold text-slate-400">
                           {e.type === 'swap' ? (
                             `${Number(e.data.amountIn)/1e7} XLM → ${Number(e.data.amountOut)/1e7} TKNA`
                           ) : (
@@ -417,7 +417,7 @@ export default function SwapPage() {
                  {events.length === 0 && (
                    <div className="h-full flex flex-col items-center justify-center opacity-30 text-center p-8">
                        <History size={48} className="mb-4 text-slate-300" />
-                       <p className="text-xs font-mono uppercase tracking-widest text-slate-500">Awaiting Trades...</p>
+                       <p className="text-xs font-mono uppercase tracking-widest text-slate-400">Awaiting Trades...</p>
                    </div>
                  )}
               </div>

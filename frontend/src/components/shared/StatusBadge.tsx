@@ -8,11 +8,11 @@ interface StatusBadgeProps {
 
 export default function StatusBadge({ children, type = "info", className = "" }: StatusBadgeProps) {
   const styles = {
-    success: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    warning: "bg-amber-50 text-amber-600 border-amber-100",
-    error: "bg-red-50 text-red-600 border-red-100",
-    info: "bg-slate-50 text-slate-600 border-slate-100",
-    live: "bg-cyan-50 text-brand-cyan border-brand-cyan/20",
+    success: "bg-emerald-950/20 text-emerald-600 border-emerald-900/30",
+    warning: "bg-amber-950/20 text-amber-400 border-amber-900/30",
+    error: "bg-red-950/20 text-red-400 border-red-900/30",
+    info: "bg-black text-slate-400 border-white/10",
+    live: "bg-cyan-950/20 text-brand-cyan border-brand-cyan/20",
   };
 
   return (

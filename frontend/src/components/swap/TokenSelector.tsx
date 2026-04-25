@@ -44,12 +44,12 @@ export default function TokenSelector({
             initial={{ opacity: 0, y: 100, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.95 }}
-            className="fixed bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full max-w-md bg-white border border-slate-200 rounded-t-3xl md:rounded-3xl p-6 z-[101] shadow-2xl"
+            className="fixed bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full max-w-md bg-black border border-white/10 rounded-t-3xl md:rounded-3xl p-6 z-[101] shadow-2xl"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-slate-900">Select a Token</h2>
-              <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-xl transition-colors">
-                <X size={20} className="text-slate-500" />
+              <h2 className="text-xl font-bold text-slate-50">Select a Token</h2>
+              <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
+                <X size={20} className="text-slate-400" />
               </button>
             </div>
 
@@ -60,7 +60,7 @@ export default function TokenSelector({
                 placeholder="Search name or address"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-brand-cyan transition-colors text-slate-900 placeholder:text-slate-300"
+                className="w-full bg-black border border-white/10 rounded-2xl py-3 pl-12 pr-4 outline-none focus:border-brand-cyan transition-colors text-slate-50 placeholder:text-slate-300"
               />
             </div>
 
@@ -69,17 +69,17 @@ export default function TokenSelector({
                 <button
                   key={token.id}
                   onClick={() => { onSelect(token); onClose(); }}
-                  className={`w-full p-4 rounded-2xl flex items-center justify-between hover:bg-slate-50 transition-all ${
-                    selectedToken === token.id ? "bg-cyan-50 border border-brand-cyan/20" : "border border-transparent"
+                  className={`w-full p-4 rounded-2xl flex items-center justify-between hover:bg-black transition-all ${
+                    selectedToken === token.id ? "bg-cyan-950/20 border border-brand-cyan/20" : "border border-transparent"
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="text-2xl w-10 h-10 flex items-center justify-center bg-slate-100 rounded-xl">
+                    <div className="text-2xl w-10 h-10 flex items-center justify-center bg-white/5 rounded-xl">
                       {token.logo}
                     </div>
                     <div className="text-left">
-                      <div className="font-bold text-slate-900">{token.symbol}</div>
-                      <div className="text-xs text-slate-500">{token.name}</div>
+                      <div className="font-bold text-slate-50">{token.symbol}</div>
+                      <div className="text-xs text-slate-400">{token.name}</div>
                     </div>
                   </div>
                   {selectedToken === token.id && <Check size={18} className="text-brand-cyan" />}
