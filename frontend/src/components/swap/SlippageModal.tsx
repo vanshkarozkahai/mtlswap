@@ -27,34 +27,34 @@ export default function SlippageModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-industrial-charcoal/80 z-[100]"
           />
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm bg-black border border-white/10 rounded-3xl p-6 z-[101] shadow-2xl"
+            exit={{ opacity: 0, scale: 0.98 }}
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm plate p-6 z-[101] shadow-2xl"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold flex items-center gap-2 text-slate-50">
-                <Settings2 size={20} className="text-brand-cyan" />
-                Settings
+              <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2 text-industrial-silver">
+                <Settings2 size={18} className="text-industrial-silver" />
+                PROTOCOL_CONFIG
               </h2>
-              <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
-                <X size={20} className="text-slate-400" />
+              <button onClick={onClose} className="p-2 recessed hover:brightness-125 transition-all">
+                <X size={20} className="text-industrial-gray" />
               </button>
             </div>
 
             <div className="space-y-6">
               <div>
-                <label className="text-sm font-bold text-slate-400 mb-3 block uppercase tracking-wider">Slippage Tolerance</label>
-                <div className="flex gap-2">
+                <label className="text-[10px] font-mono text-industrial-gray mb-3 block uppercase tracking-widest">SLIPPAGE_TOLERANCE</label>
+                <div className="flex gap-1">
                   {PRESETS.map((p) => (
                     <button
                       key={p}
                       onClick={() => { onChange(p); setCustom(p.toString()); }}
-                      className={`flex-1 py-3 rounded-xl font-bold transition-all ${
-                        value === p ? "bg-brand-cyan text-white shadow-md shadow-cyan-500/20" : "bg-black border border-white/10 text-slate-400 hover:bg-white/5"
+                      className={`flex-1 py-3 font-mono text-xs transition-all ${
+                        value === p ? "bg-industrial-silver text-industrial-charcoal" : "recessed text-industrial-gray"
                       }`}
                     >
                       {p}%
@@ -63,30 +63,29 @@ export default function SlippageModal({
                   <div className="relative flex-1">
                     <input 
                       type="number"
-                      placeholder="Custom"
+                      placeholder="CUSTOM"
                       value={custom}
                       onChange={(e) => {
                         setCustom(e.target.value);
                         onChange(parseFloat(e.target.value) || 0.5);
                       }}
-                      className="w-full h-full bg-black border border-white/10 rounded-xl px-3 outline-none text-right font-bold focus:border-brand-cyan text-slate-50"
+                      className="w-full h-full recessed px-3 outline-none text-right font-mono text-xs text-industrial-silver"
                     />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 font-bold">%</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-cyan-950/20 border border-brand-cyan/10">
-                <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                  Your transaction will revert if the price changes unfavorably by more than this percentage.
+              <div className="p-4 recessed bg-industrial-recessed/50 border-industrial-border/50">
+                <p className="text-[9px] font-mono text-industrial-gray leading-tight uppercase">
+                  Execution will terminate if price deviation exceeds selected threshold.
                 </p>
               </div>
 
               <button 
                 onClick={onClose}
-                className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all active:scale-[0.98]"
+                className="btn-industrial w-full bg-industrial-silver text-industrial-charcoal"
               >
-                Save Settings
+                SAVE_PARAMETERS
               </button>
             </div>
           </motion.div>

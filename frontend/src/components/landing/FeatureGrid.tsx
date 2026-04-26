@@ -6,20 +6,20 @@ import { Cpu, Coins, Layers, Activity } from "lucide-react";
 
 const features = [
   {
-    title: "Instant Swaps",
-    desc: "Experience lightning-fast token exchanges on the Blockchain network with minimal slippage and near-zero latency.",
+    title: "INSTANT_SWAPS",
+    desc: "Lightning-fast token exchanges on the Soroban network with rigid precision and zero friction.",
     icon: <Coins size={24} />,
     className: ""
   },
   {
-    title: "Liquidity Mining",
-    desc: "Provide liquidity to the protocol and earn a share of every trade while helping to stabilize the ecosystem.",
+    title: "LIQUIDITY_MINING",
+    desc: "Deposit assets into the protocol vault and earn programmed yield from network activity.",
     icon: <Layers size={24} />,
     className: ""
   },
   {
-    title: "Soroban Powered",
-    desc: "Built on the cutting edge of smart contract technology, ensuring security, scalability, and transparency.",
+    title: "SOROBAN_POWERED",
+    desc: "Forged with next-generation smart contract technology. Secure. Scalable. Transparent.",
     icon: <Cpu size={24} />,
     className: ""
   }
@@ -29,9 +29,9 @@ export default function FeatureGrid() {
   return (
     <section id="features" className="py-24 max-w-7xl mx-auto px-6">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-50">Pulse of the Protocol</h2>
-        <p className="text-slate-400 max-w-xl mx-auto text-lg">
-          AuraSwap leverages the full potential of Soroban to bring institutional-grade DeFi to the Blockchain network.
+        <h2 className="text-4xl md:text-5xl font-black mb-4 text-industrial-silver uppercase tracking-tighter">PROTOCOL_ENGINE</h2>
+        <p className="text-industrial-gray max-w-xl mx-auto text-sm font-mono uppercase">
+          Metal-Swap utilizes high-performance Soroban infrastructure to deliver industrial-grade DeFi solutions.
         </p>
       </div>
 
@@ -39,17 +39,17 @@ export default function FeatureGrid() {
         {features.map((f, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className={`bg-black border border-white/10 hover:border-brand-cyan/30 hover:shadow-xl hover:shadow-cyan-500/5 p-8 rounded-[32px] group transition-all ${f.className}`}
+            transition={{ delay: i * 0.1, duration: 0.2 }}
+            className={`plate p-8 transition-all ${f.className}`}
           >
-            <div className="w-12 h-12 rounded-2xl bg-cyan-950/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              {React.cloneElement(f.icon as React.ReactElement, { className: "text-brand-cyan" })}
+            <div className="w-12 h-12 recessed flex items-center justify-center mb-6 group-hover:brightness-125 transition-all">
+              {React.cloneElement(f.icon as React.ReactElement, { className: "text-industrial-silver" })}
             </div>
-            <h3 className="text-2xl font-bold mb-3 text-slate-50">{f.title}</h3>
-            <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+            <h3 className="text-xl font-black mb-3 text-industrial-silver uppercase tracking-tight">{f.title}</h3>
+            <p className="text-industrial-gray leading-tight text-xs font-mono uppercase">
               {f.desc}
             </p>
           </motion.div>

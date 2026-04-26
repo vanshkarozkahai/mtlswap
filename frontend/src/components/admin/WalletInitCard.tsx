@@ -18,7 +18,7 @@ export default function WalletInitCard() {
     if (!address) return;
     setChecking(true);
     try {
-      const result = await checkAssetTrust("TKNA");
+      const result = await checkAssetTrust("MTLSW");
       setHasTrust(result);
     } catch (e) {
       setHasTrust(false);
@@ -80,7 +80,7 @@ export default function WalletInitCard() {
               </h4>
               <p className="text-xs text-slate-400 leading-relaxed">
                 {hasTrust 
-                  ? "Your account is successfully linked to the TKNA token gate. You can now receive assets and seed market liquidity."
+                  ? "Your account is successfully linked to the MTLSW token gate. You can now receive assets and seed market liquidity."
                   : "Every Market Maker account must explicitly trust the protocol's tokens before it can receive them or place DEX orders."}
               </p>
             </div>

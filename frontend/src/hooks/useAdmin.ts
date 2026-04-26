@@ -12,10 +12,10 @@ import { horizonServer, ISSUER_ADDRESS, NETWORK_DETAILS } from "@/lib/blockchain
 import { signWithFreighter } from "@/lib/freighter";
 import { toast } from "sonner";
 
-// For demo purposes, the first user or a specific test address can be admin
 const ADMIN_ADDRESSES = [
-  "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM", // Issuer
+  "GBKNHIATMCYTFZZZUX347NF2SCH7MKMT7HS73HOVCC55CDJEI53I6S5A", // Primary Issuer
   "GCGUQ2F6LKRCD6PUDJKTVNGNEFVGJJPLBM7L64I5YFM7SBQGGXNXMVUM", // Market Maker
+  "GC7SEQUPZUQSFX4HZECHCF5CSD7VYUVXCDREQBHQVS5BLDCOESCD33HL", // Admin
 ];
 
 export const useAdmin = () => {
@@ -43,7 +43,7 @@ export const useAdmin = () => {
     const toastId = toast.loading("Preparing issuance transaction...");
     try {
       const account = await horizonServer.loadAccount(address);
-      const asset = new Asset("TKNA", ISSUER_ADDRESS);
+      const asset = new Asset("MTLSW", ISSUER_ADDRESS);
 
       const tx = new TransactionBuilder(account, {
         fee: BASE_FEE,
@@ -80,7 +80,7 @@ export const useAdmin = () => {
       const resultCodes = data?.extras?.result_codes;
       let errorMsg = resultCodes 
         ? `Stellar Error: ${resultCodes.transaction}${resultCodes.operations ? ` (${resultCodes.operations[0]})` : ""}`
-        : (data?.detail || e.message || "Minting failed");
+        : (data?.detail || data?.title || e.message || "Minting failed");
 
       if (e.response?.status === 404) {
         errorMsg = "Account not found. Please fund your wallet with XLM via a faucet.";
@@ -102,49 +102,49 @@ export const useAdmin = () => {
       }
 
       const account = await horizonServer.loadAccount(address);
-      const tknaAsset = new Asset("TKNA", ISSUER_ADDRESS);
+      const mtlswAsset = new Asset("MTLSW", ISSUER_ADDRESS);
       const xlmAsset = Asset.native();
 
       // Diagnostic: Check balances
       const xlmBalance = parseFloat(account.balances.find((b: any) => b.asset_type === "native")?.balance || "0");
-      const tknaBalance = parseFloat(account.balances.find((b: any) => b.asset_code === "TKNA")?.balance || "0");
+      const mtlswBalance = parseFloat(account.balances.find((b: any) => b.asset_code === "MTLSW")?.balance || "0");
 
       if (xlmBalance < 105) {
         throw new Error(`Insufficient XLM: You have ${xlmBalance} XLM, but need at least 105 XLM for the liquidity offers and reserves. Please use a faucet.`);
       }
 
-      if (tknaBalance < 100) {
-        throw new Error(`Insufficient TKNA: You have ${tknaBalance} TKNA, but need 100 for the sell offer. Please Mint tokens from the Issuer first.`);
+      if (mtlswBalance < 100) {
+        throw new Error(`Insufficient MTLSW: You have ${mtlswBalance} MTLSW, but need 100 for the sell offer. Please Mint tokens from the Issuer first.`);
       }
 
       const tx = new TransactionBuilder(account, {
         fee: BASE_FEE,
         networkPassphrase: NETWORK_DETAILS.networkPassphrase,
       })
-        // 1. Ensure Trustline: Needed for the non-issuer MM account to receive TKNA
+        // 1. Ensure Trustline: Needed for the non-issuer MM account to receive MTLSW
         .addOperation(
           Operation.changeTrust({
-            asset: tknaAsset,
+            asset: mtlswAsset,
             limit: "1000000"
           })
         )
-        // 2. Offer: Sell TKNA for XLM (Providing TKNA liquidity)
+        // 2. Offer: Sell MTLSW for XLM (Providing MTLSW liquidity)
         .addOperation(
           Operation.manageSellOffer({
-            selling: tknaAsset,
+            selling: mtlswAsset,
             buying: xlmAsset,
             amount: "100",
-            price: "2.0", // Sell 1 TKNA for 2 XLM
+            price: "2.0", // Sell 1 MTLSW for 2 XLM
             offerId: "0" 
           })
         )
-        // 3. Offer: Sell XLM for TKNA (Providing XLM liquidity)
+        // 3. Offer: Sell XLM for MTLSW (Providing XLM liquidity)
         .addOperation(
           Operation.manageSellOffer({
             selling: xlmAsset,
-            buying: tknaAsset,
+            buying: mtlswAsset,
             amount: "100",
-            price: "2.0", // Sell 1 XLM for 2 TKNA (Buy 1 TKNA for 0.5 XLM)
+            price: "2.0", // Sell 1 XLM for 2 MTLSW (Buy 1 MTLSW for 0.5 XLM)
             offerId: "0"
           })
         )
@@ -201,7 +201,7 @@ export const useAdmin = () => {
     const toastId = toast.loading("Initializing Wallet: Creating trustline...");
     try {
       const account = await horizonServer.loadAccount(address);
-      const tknaAsset = new Asset("TKNA", ISSUER_ADDRESS);
+      const mtlswAsset = new Asset("MTLSW", ISSUER_ADDRESS);
 
       const tx = new TransactionBuilder(account, {
         fee: BASE_FEE,
@@ -209,7 +209,7 @@ export const useAdmin = () => {
       })
         .addOperation(
           Operation.changeTrust({
-            asset: tknaAsset,
+            asset: mtlswAsset,
             limit: "1000000"
           })
         )
@@ -227,7 +227,7 @@ export const useAdmin = () => {
 
       toast.success("Wallet Initialized!", { 
         id: toastId,
-        description: "You are now ready to receive TKNA tokens."
+        description: "You are now ready to receive MTLSW tokens."
       });
       return { status: "SUCCESS", hash: result.hash };
     } catch (e: any) {

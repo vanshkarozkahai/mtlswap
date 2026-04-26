@@ -20,71 +20,69 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-industrial-charcoal flex flex-col items-center justify-center">
         <Navbar />
-        <div className="p-8 rounded-full border-b-2 border-brand-cyan animate-spin" />
+        <div className="p-8 plate border-b-2 border-industrial-silver animate-spin" />
       </div>
     );
   }
 
   if (!isAdmin) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-industrial-charcoal flex flex-col items-center justify-center p-6 text-center font-mono">
         <Navbar />
-        <div className="w-20 h-20 bg-red-950/20 rounded-full flex items-center justify-center mb-6 border border-red-900/30">
-          <Lock className="text-red-400" size={40} />
+        <div className="w-20 h-20 recessed flex items-center justify-center mb-6">
+          <Lock className="text-industrial-silver" size={40} />
         </div>
-        <h1 className="text-3xl font-bold mb-4 text-slate-50">Admin Access Required</h1>
-        <p className="text-slate-400 max-w-md mb-8">
-          You must be connected with a protocol administrator wallet to access this section.
+        <h1 className="text-3xl font-black mb-4 text-industrial-silver uppercase tracking-tighter">ACCESS_RESTRICTED</h1>
+        <p className="text-industrial-gray max-w-md mb-8 uppercase text-[10px] leading-tight">
+          PROTOCOL_ADMINISTRATOR_WALLET_REQUIRED. ESTABLISH_AUTHORIZED_CONNECTION_TO_PROCEED.
         </p>
-        <StatusBadge type="error">Access Denied</StatusBadge>
+        <StatusBadge type="error">DENIED</StatusBadge>
       </div>
     );
   }
 
   return (
-    <div className="bg-black min-h-screen text-slate-50 pt-32 pb-12 selection:bg-brand-cyan/20">
+    <div className="bg-industrial-charcoal min-h-screen text-industrial-silver pt-32 pb-12 font-mono">
       <Navbar />
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.05),transparent_70%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <Activity className="text-brand-cyan" size={32} />
-              <h1 className="text-4xl font-bold tracking-tight text-slate-50">Aura Hub</h1>
+              <Activity className="text-industrial-silver" size={32} />
+              <h1 className="text-4xl font-black tracking-tighter text-industrial-silver uppercase">ADMIN_CONSOLE</h1>
             </div>
-            <p className="text-slate-400 font-medium">Global administration and diagnostic console</p>
+            <p className="text-industrial-gray font-black uppercase text-[10px]">GLOBAL_ADMINISTRATION_AND_DIAGNOSTIC_HUB</p>
           </div>
-          <div className="flex flex-wrap gap-3">
-             <StatusBadge type="live">Live Monitor</StatusBadge>
-             <StatusBadge type="success" className="bg-cyan-950/20">Admin Connected</StatusBadge>
-             <StatusBadge type={isIssuer ? "info" : "success"} className={isIssuer ? "bg-blue-950/20" : "bg-emerald-950/20"}>
-               Role: {isIssuer ? "Issuer" : "Market Maker"}
+          <div className="flex flex-wrap gap-2">
+             <StatusBadge type="live">LIVE_MONITOR</StatusBadge>
+             <StatusBadge type="success">ADMIN_LINK_ESTABLISHED</StatusBadge>
+             <StatusBadge type={isIssuer ? "info" : "success"}>
+               ROLE: {isIssuer ? "ISSUER" : "MARKET_MAKER"}
              </StatusBadge>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             className="lg:col-span-8 space-y-8"
           >
             {!isIssuer && <WalletInitCard />}
             <MintCard />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-               <div className="bg-black p-8 rounded-[32px] border border-white/10 shadow-sm relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-950/20 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
-                  <h3 className="text-xl font-bold mb-2 text-slate-50">Orderbook Controls</h3>
-                  <p className="text-sm text-slate-400 mb-6 font-medium">Initialize the Traditional DEX orderbook to enable real network swaps.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div className="bg-industrial-steel p-8 border border-industrial-border relative overflow-hidden group">
+                  <h3 className="text-lg font-black mb-2 text-industrial-silver uppercase tracking-tight">ORDERBOOK_REGISTRY</h3>
+                  <p className="text-[10px] text-industrial-gray mb-6 font-black uppercase leading-tight">INITIALIZE_TRADITIONAL_DEX_LIQUIDITY_FABRIC.</p>
                   
                   {isIssuer ? (
-                    <div className="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-4 mb-4 flex items-start gap-3">
-                      <AlertCircle className="text-amber-400 shrink-0 mt-0.5" size={16} />
-                      <div className="text-xs text-amber-400 leading-relaxed">
-                        <strong>Issuer Restriction:</strong> Switch to your Market Maker wallet to seed liquidity. Issuers cannot hold tokens to sell.
+                    <div className="recessed p-4 mb-4 flex items-start gap-3">
+                      <AlertCircle className="text-industrial-gray shrink-0 mt-0.5" size={16} />
+                      <div className="text-[9px] text-industrial-gray leading-tight uppercase font-black">
+                        <strong>ISSUER_RESTRICTION:</strong> SWITCH_TO_MARKET_MAKER_IDENTITY.
                       </div>
                     </div>
                   ) : null}
@@ -98,37 +96,36 @@ export default function AdminPage() {
                         // Handled by hook toasts
                       }
                     }}
-                    className="text-brand-cyan font-bold text-sm tracking-widest uppercase flex items-center gap-2 hover:gap-3 transition-all"
+                    className="text-industrial-silver font-black text-xs tracking-widest uppercase flex items-center gap-2 hover:brightness-125 transition-all"
                   >
-                    Seed DEX Liquidity
+                    SEED_DEX_LIQUIDITY
                   </button>
                </div>
-               <div className="bg-black p-8 rounded-[32px] border border-white/10 shadow-sm relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-950/20 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
-                  <h3 className="text-xl font-bold mb-2 text-slate-50">Security Audit</h3>
-                  <p className="text-sm text-slate-400 mb-6 font-medium">Review contract interactions and suspicious ledger activity</p>
-                  <button className="text-brand-cyan font-bold text-sm tracking-widest uppercase flex items-center gap-2 hover:gap-3 transition-all">
-                    View Logs
+               <div className="bg-industrial-steel p-8 border border-industrial-border relative overflow-hidden group">
+                  <h3 className="text-lg font-black mb-2 text-industrial-silver uppercase tracking-tight">SECURITY_LOGS</h3>
+                  <p className="text-[10px] text-industrial-gray mb-6 font-black uppercase leading-tight">AUDIT_CONTRACT_INTERACTIONS_AND_NETWORK_STATE.</p>
+                  <button className="text-industrial-silver font-black text-xs tracking-widest uppercase flex items-center gap-2 hover:brightness-125 transition-all">
+                    VIEW_AUDIT_TRAIL
                   </button>
                </div>
             </div>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             className="lg:col-span-4"
           >
             <PreflightCheck />
-            <div className="mt-8 p-6 rounded-[32px] bg-red-950/20 border border-red-900/30 flex items-start gap-4">
-               <ShieldAlert className="text-red-400 mt-1" size={20} />
+            <div className="mt-8 p-6 plate border-industrial-border flex items-start gap-4 bg-industrial-charcoal">
+               <ShieldAlert className="text-industrial-silver mt-1" size={20} />
                <div>
-                  <h4 className="text-sm font-bold text-red-400 mb-1">Danger Zone</h4>
-                  <p className="text-xs text-red-400/60 leading-relaxed font-medium">
-                    Functions in this area can permanently alter protocol state. Proceed with extreme caution.
+                  <h4 className="text-xs font-black text-industrial-silver mb-1 uppercase">CRITICAL_ACTION_ZONE</h4>
+                  <p className="text-[9px] text-industrial-gray leading-tight uppercase font-black">
+                    FUNCTIONS_IN_THIS_MODULE_PERMANENTLY_ALTER_STATE. PROCEED_WITH_CAUTION.
                   </p>
-                  <button className="mt-4 text-xs font-bold text-red-400 bg-red-950/40 px-4 py-2 rounded-xl hover:bg-red-200 transition-all active:scale-[0.95]">
-                    Pause Protocol
+                  <button className="btn-industrial mt-4 text-[10px] font-black px-4 py-2">
+                    SUSPEND_PROTOCOL
                   </button>
                </div>
             </div>

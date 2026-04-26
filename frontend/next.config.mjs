@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [' @stellar/stellar-sdk', ' @stellar/freighter-api'],
+  transpilePackages: ['@stellar/stellar-sdk', '@stellar/freighter-api'],
   webpack: (config, { isServer, webpack }) => {
     config.externals = [...(config.externals || []), { 'sodium-native': 'js-base64' }];
     

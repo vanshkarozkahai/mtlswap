@@ -13,7 +13,7 @@ export const NETWORK_DETAILS = {
 };
 
 // Trustline Issuer Configuration
-export const ISSUER_ADDRESS = "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM";
+export const ISSUER_ADDRESS = "GBKNHIATMCYTFZZZUX347NF2SCH7MKMT7HS73HOVCC55CDJEI53I6S5A";
 
 export const CONTRACT_IDS = {
   token: process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ID || "CCPQ2RMOWJ6ZPNOPTT63RPR6QICCQMETFBYQTWJIVVZL6U2LV6W4QMZM",
@@ -26,7 +26,9 @@ export const checkTrustline = async (address: string, assetCode: string, retries
     try {
       const account = await horizonServer.loadAccount(address);
       const isTrusted = account.balances.some(
-        (b: any) => b.asset_code === assetCode || (assetCode === "XLM" && b.asset_type === "native")
+        (b: any) => 
+          (b.asset_code === assetCode && b.asset_issuer === ISSUER_ADDRESS) || 
+          (assetCode === "XLM" && b.asset_type === "native")
       );
       if (isTrusted) return true;
       if (retries > 1) await new Promise(r => setTimeout(r, 1200)); // Slightly longer wait

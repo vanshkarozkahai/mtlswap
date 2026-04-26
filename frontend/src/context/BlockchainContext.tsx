@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from "react";
 import { initPolyfills } from "@/lib/polyfills";
 import { connectWallet, signWithFreighter, isWalletConnected } from "@/lib/freighter";
-import { checkTrustline, createTrustlineXDR, submitTransactionXDR, horizonServer, NETWORK_DETAILS } from "@/lib/blockchain";
+import { checkTrustline, createTrustlineXDR, submitTransactionXDR, horizonServer, NETWORK_DETAILS, ISSUER_ADDRESS } from "@/lib/blockchain";
 import { toast } from "sonner";
 
 // Initialize polyfills immediately at module level
@@ -105,8 +105,6 @@ export function BlockchainProvider({ children }: { children: ReactNode }) {
     if (!checkAddr) return false;
     
     // Self-trust protection: if the address is the issuer, they don't need a trustline
-    const ISSUER_ADDRESS = "GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM";
-    
     if (checkAddr === ISSUER_ADDRESS) {
       // Still must verify account exists for issuance to work
       try {

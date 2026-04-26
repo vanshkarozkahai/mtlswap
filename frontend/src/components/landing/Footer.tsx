@@ -6,65 +6,65 @@ import { CONTRACT_IDS } from "@/lib/blockchain";
 
 export default function Footer() {
   return (
-    <footer className="py-24 border-t border-white/10 bg-black">
+    <footer className="py-24 border-t border-industrial-border bg-industrial-charcoal font-mono">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="md:col-span-2">
           <Link href="/" className="flex items-center gap-2 mb-6">
-            <div className="p-2 bg-brand-cyan/10 rounded-lg">
-              <Activity size={20} className="text-brand-cyan" />
+            <div className="p-2 recessed">
+              <Activity size={20} className="text-industrial-silver" />
             </div>
-            <span className="font-bold text-xl text-slate-50">AuraSwap</span>
+            <span className="font-black text-xl text-industrial-silver uppercase tracking-tighter">MetalSwap</span>
           </Link>
-          <p className="text-slate-400 max-w-sm mb-8 leading-relaxed">
-             Building the future of liquidity on the Blockchain network. Secure, atomic, and blisteringly fast.
+          <p className="text-industrial-gray max-w-sm mb-8 leading-tight text-xs uppercase">
+             INDUSTRIAL-GRADE LIQUIDITY INFRASTRUCTURE. FORGED ON SOROBAN. ATOMIC. PRECISE. UNYIELDING.
           </p>
-          <div className="flex gap-4">
-             <div className="p-3 bg-black border border-white/10 rounded-xl cursor-pointer hover:bg-cyan-950/20 hover:border-cyan-200 transition-colors text-slate-400 hover:text-brand-cyan">
-                <Twitter size={20} />
+          <div className="flex gap-2">
+             <div className="p-3 plate cursor-pointer hover:brightness-125 transition-all text-industrial-gray">
+                <Twitter size={18} />
              </div>
-             <div className="p-3 bg-black border border-white/10 rounded-xl cursor-pointer hover:bg-cyan-950/20 hover:border-cyan-200 transition-colors text-slate-400 hover:text-brand-cyan">
-                <Github size={20} />
+             <div className="p-3 plate cursor-pointer hover:brightness-125 transition-all text-industrial-gray">
+                <Github size={18} />
              </div>
-             <div className="p-3 bg-black border border-white/10 rounded-xl cursor-pointer hover:bg-cyan-950/20 hover:border-cyan-200 transition-colors text-slate-400 hover:text-brand-cyan">
-                <MessageSquare size={20} />
+             <div className="p-3 plate cursor-pointer hover:brightness-125 transition-all text-industrial-gray">
+                <MessageSquare size={18} />
              </div>
           </div>
         </div>
 
         <div>
-          <h4 className="font-bold text-slate-50 mb-6 pt-1">Resources</h4>
-          <ul className="space-y-4 text-slate-400 text-sm">
-             <li><Link href="#" className="hover:text-brand-cyan transition-colors">Documentation</Link></li>
-             <li><Link href="#" className="hover:text-brand-cyan transition-colors">Brand Assets</Link></li>
-             <li><Link href="#" className="hover:text-brand-cyan transition-colors">Developer Portal</Link></li>
-             <li><Link href="#" className="hover:text-brand-cyan transition-colors">Audit Reports</Link></li>
+          <h4 className="font-black text-industrial-silver text-xs mb-6 pt-1 uppercase tracking-widest">_RESOURCES</h4>
+          <ul className="space-y-4 text-industrial-gray text-[10px] uppercase">
+             <li><Link href="#" className="hover:text-industrial-silver transition-colors">Documentation</Link></li>
+             <li><Link href="#" className="hover:text-industrial-silver transition-colors">Brand Assets</Link></li>
+             <li><Link href="#" className="hover:text-industrial-silver transition-colors">Developer Portal</Link></li>
+             <li><Link href="#" className="hover:text-industrial-silver transition-colors">Audit Reports</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-bold text-slate-50 mb-6 pt-1">Contracts (Testnet)</h4>
-          <ul className="space-y-4 text-xs font-mono text-slate-400">
+          <h4 className="font-black text-industrial-silver text-xs mb-6 pt-1 uppercase tracking-widest">_REGISTRY_KEYS</h4>
+          <ul className="space-y-4 text-[9px] font-mono text-industrial-gray">
              <li className="flex flex-col gap-1">
-                <span className="text-slate-400 uppercase text-[9px] tracking-widest font-bold">Router</span>
-                <span className="text-slate-50 truncate">{CONTRACT_IDS.router}</span>
+                <span className="text-industrial-gray/50 uppercase text-[8px] font-bold">ROUTER_ID</span>
+                <span className="text-industrial-silver truncate">{CONTRACT_IDS.router}</span>
              </li>
              <li className="flex flex-col gap-1">
-                <span className="text-slate-400 uppercase text-[9px] tracking-widest font-bold">Liquidity Pool</span>
-                <span className="text-slate-50 truncate">{CONTRACT_IDS.pool}</span>
+                <span className="text-industrial-gray/50 uppercase text-[8px] font-bold">POOL_ID</span>
+                <span className="text-industrial-silver truncate">{CONTRACT_IDS.pool}</span>
              </li>
              <li className="flex flex-col gap-1">
-                <span className="text-slate-400 uppercase text-[9px] tracking-widest font-bold">Token Factory</span>
-                <span className="text-slate-50 truncate">{CONTRACT_IDS.token}</span>
+                <span className="text-industrial-gray/50 uppercase text-[8px] font-bold">FACTORY_ID</span>
+                <span className="text-industrial-silver truncate">{CONTRACT_IDS.token}</span>
              </li>
           </ul>
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-mono">
-         <p>© 2026 AuraSwap Protocol. All rights reserved.</p>
+      <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-industrial-border flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-industrial-gray font-mono uppercase tracking-widest">
+         <p>© 2026 METALSWAP_TERMINAL. ALL RIGHTS RESERVED.</p>
          <div className="flex gap-8">
-            <Link href="#" className="hover:text-brand-cyan transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-brand-cyan transition-colors">Terms of Service</Link>
+            <Link href="#" className="hover:text-industrial-silver transition-colors">PRIVACY_POLICY</Link>
+            <Link href="#" className="hover:text-industrial-silver transition-colors">TERMS_OF_SERVICE</Link>
          </div>
       </div>
     </footer>

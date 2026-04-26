@@ -18,7 +18,7 @@ function RecipientStatus({ address }: { address: string }) {
     const verify = async () => {
       setStatus("checking");
       try {
-        const hasTrust = await checkAssetTrust("TKNA", address);
+        const hasTrust = await checkAssetTrust("MTLSW", address);
         setStatus(hasTrust ? "valid" : "invalid");
       } catch {
         setStatus("invalid");
@@ -27,11 +27,11 @@ function RecipientStatus({ address }: { address: string }) {
     if (address.length === 56) verify();
   }, [address, checkAssetTrust]);
 
-  if (status === "checking") return <Loader2 className="animate-spin text-slate-300" size={16} />;
+  if (status === "checking") return <Loader2 className="animate-spin text-industrial-silver" size={16} />;
   return status === "valid" ? (
-    <StatusBadge type="success">Trusted</StatusBadge>
+    <StatusBadge type="success">VALID_TRUSTLINE</StatusBadge>
   ) : (
-    <StatusBadge type="error">No Trustline</StatusBadge>
+    <StatusBadge type="error">MISSING_TRUSTLINE</StatusBadge>
   );
 }
 
@@ -65,10 +65,10 @@ export default function MintCard() {
     try {
       // Step 1: Trustline & Account Check
       try {
-        const hasTrust = await checkAssetTrust("TKNA");
+        const hasTrust = await checkAssetTrust("MTLSW", recipient);
         if (!hasTrust) {
           toast.error("Recipient lacks trustline", {
-            description: "They must enable TKNA trustline first."
+            description: "They must enable MTLSW trustline first."
           });
           setLoading(false);
           return;
@@ -95,7 +95,7 @@ export default function MintCard() {
         body: JSON.stringify({
           adminAddress: address,
           action: "MINT",
-          details: `Minted ${amount} TKNA to ${recipient}`,
+          details: `Minted ${amount} MTLSW to ${recipient}`,
           txHash: "tx_mint_" + Math.random().toString(36).substring(7)
         })
       });
@@ -114,61 +114,60 @@ export default function MintCard() {
   };
 
   return (
-    <div className="bg-black p-8 rounded-[32px] border border-white/10 shadow-sm relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-950/20 rounded-full -mr-16 -mt-16 group-hover:bg-cyan-100 transition-colors" />
+    <div className="bg-industrial-steel p-8 border border-industrial-border relative overflow-hidden group font-mono">
       <div className="flex justify-between items-center mb-6 relative z-10">
         <div className="flex items-center gap-3">
-          <div className="p-3 bg-cyan-950/20 rounded-2xl">
-            <Coins className="text-brand-cyan" />
+          <div className="p-3 recessed text-industrial-silver">
+            <Coins size={20} />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-slate-50">Token Issuance</h3>
-            <p className="text-xs text-slate-400 font-medium">Mint protocol assets to any authorized wallet</p>
+            <h3 className="text-lg font-black text-industrial-silver uppercase tracking-tight">TOKEN_ISSUANCE_MODULE</h3>
+            <p className="text-[9px] text-industrial-gray font-black uppercase">MINT_PROTOCOL_ASSETS_TO_AUTHORIZED_WALLETS</p>
           </div>
         </div>
-        <StatusBadge type="info">Active</StatusBadge>
+        <StatusBadge type="info">READY</StatusBadge>
       </div>
 
       <div className="space-y-4 relative z-10">
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Your Connected Address</label>
-          <div className="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-4 font-mono text-xs text-slate-400 overflow-hidden text-ellipsis">
-            {address || "Not Connected"}
+          <label className="text-[9px] font-black uppercase tracking-widest text-industrial-gray mb-2 block">_ADMIN_IDENTIFIER</label>
+          <div className="w-full recessed px-6 py-4 text-[10px] text-industrial-gray overflow-hidden text-ellipsis">
+            {address || "NOT_ESTABLISHED"}
           </div>
         </div>
 
         <div className="relative group/input">
-           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Recipient Address</label>
+           <label className="text-[9px] font-black uppercase tracking-widest text-industrial-gray mb-2 block">_RECIPIENT_ADDRESS</label>
            <input 
             type="text"
             placeholder="G..."
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
-            className="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-mono text-xs text-slate-50 pr-32"
+            className="w-full recessed px-6 py-4 outline-none text-[10px] text-industrial-silver pr-32"
           />
           {recipient && recipient.length === 56 && (
-            <div className="absolute right-4 bottom-4">
+            <div className="absolute right-4 bottom-3">
                <RecipientStatus address={recipient} />
             </div>
           )}
         </div>
 
         <div>
-          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Amount to Mint</label>
+          <label className="text-[9px] font-black uppercase tracking-widest text-industrial-gray mb-2 block">_MINT_QUANTITY</label>
           <input 
             type="number"
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-brand-cyan transition-all font-bold text-lg text-slate-50"
+            className="w-full recessed px-6 py-4 outline-none font-black text-xl text-industrial-silver"
           />
         </div>
 
         {isNotIssuer && (
-          <div className="bg-amber-950/20 border border-amber-900/30 rounded-2xl p-4 flex items-start gap-3">
-            <AlertCircle className="text-amber-400 shrink-0 mt-0.5" size={16} />
-            <div className="text-xs text-amber-400 leading-relaxed font-medium">
-              <strong>Non-Issuer Role:</strong> Only the primary issuing account can mint tokens. Please switch wallets if you need to create more supply.
+          <div className="recessed p-4 flex items-start gap-3">
+            <AlertCircle className="text-industrial-gray shrink-0 mt-0.5" size={16} />
+            <div className="text-[9px] text-industrial-gray leading-tight font-black uppercase">
+              <strong>IDENTITY_MISMATCH:</strong> ONLY_PRIMARY_ISSUER_HAS_MINT_AUTHORITY.
             </div>
           </div>
         )}
@@ -176,13 +175,13 @@ export default function MintCard() {
         <button
           onClick={handleMint}
           disabled={!!(loading || isNotIssuer)}
-          className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 shadow-lg transition-all active:scale-[0.98] disabled:opacity-50"
+          className="btn-industrial w-full py-4 bg-industrial-silver text-industrial-charcoal font-black flex items-center justify-center gap-2 uppercase tracking-widest"
         >
           {loading ? (
             <Loader2 className="animate-spin" size={20} />
           ) : (
             <>
-              <CheckCircle2 size={20} /> Mint Assets
+              <CheckCircle2 size={20} /> EXECUTE_MINT
             </>
           )}
         </button>

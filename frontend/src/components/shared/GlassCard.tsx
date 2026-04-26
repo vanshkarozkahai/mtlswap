@@ -7,11 +7,15 @@ interface GlassCardProps {
   hover?: boolean;
 }
 
+/**
+ * Machined Metal Plate Component (Legacy name GlassCard)
+ */
 export default function GlassCard({ children, className = "", hover = true }: GlassCardProps) {
   return (
     <motion.div
-      whileHover={hover ? { y: -5, boxShadow: "0 25px 50px -12px rgba(1,90,209,0.1)" } : {}}
-      className={`glass rounded-[32px] overflow-hidden border border-white/10 transition-shadow ${className}`}
+      whileHover={hover ? { scale: 1.01, filter: "brightness(1.1)" } : {}}
+      transition={{ duration: 0.1, ease: "linear" }}
+      className={`plate rounded-none overflow-hidden ${className}`}
     >
       {children}
     </motion.div>

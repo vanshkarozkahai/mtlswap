@@ -1,61 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
- :root {
-  --foreground-rgb: 248, 250, 252;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+:root {
+  --bg-surface: #121212;
+  --surface-plate: #222222;
+  --surface-recessed: #0A0A0A;
+  --border-primary: #333333;
+  --border-highlight: #444444;
+  --text-primary: #E2E2E2;
+  --text-secondary: #A0A0A0;
 }
 
 @layer base {
   body {
-    color: rgb(var(--foreground-rgb));
-    background: #000000;
+    color: var(--text-primary);
+    background: var(--bg-surface);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-    @apply text-slate-50;
+    font-family: 'Inter', sans-serif;
+    @apply font-extrabold uppercase tracking-widest text-industrial-silver;
   }
+
+
 }
 
 @layer components {
-  .glass {
-    @apply bg-black/40 backdrop-blur-2xl border border-white/10 shadow-none;
+  /* The Machined Plate - replaces .glass */
+  .plate {
+    @apply bg-industrial-steel border border-industrial-border relative;
+    box-shadow: 1px 1px 0px var(--border-highlight) inset, -1px -1px 0px #000 inset;
+  }
+
+  .glass { /* Legacy compatibility */
+    @apply plate;
   }
   
-  .glass-hover {
-    @apply hover:bg-black/60 hover:border-white/20 transition-all duration-300;
+  .plate-hover {
+    @apply hover:brightness-110 transition-all duration-150;
+  }
+
+  /* Recessed area - for inputs, data cards */
+  .recessed {
+    @apply bg-industrial-recessed border border-industrial-border;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8);
+  }
+
+  /* Industrial Button */
+  .btn-industrial {
+    @apply plate px-6 py-3 font-mono text-sm active:translate-y-[2px];
+    box-shadow: 2px 2px 0px #000, 1px 1px 0px var(--border-highlight) inset;
+  }
+
+  .btn-industrial:active {
+    box-shadow: inset 2px 2px 4px #000;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-indigo-400;
+    @apply text-industrial-silver font-bold;
   }
 }
 
-/* Custom animated background grid */
+/* Brushed Metal Background */
 .grid-background {
-  background-size: 50px 50px;
+  background-color: var(--bg-surface);
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at center, black, transparent 80%);
+    linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%, rgba(255,255,255,0.02) 100%),
+    repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 1px, rgba(255,255,255,0.01) 1px, rgba(255,255,255,0.01) 2px);
+  background-attachment: fixed;
 }
 
-.animate-pulse-slow {
-  animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  @apply text-industrial-gray text-xs uppercase tracking-tighter;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+/* Snapping transitions */
+.animate-snap {
+  transition: all 150ms cubic-bezier(0.1, 0.9, 0.2, 1);
 }

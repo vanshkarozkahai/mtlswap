@@ -30,8 +30,8 @@ export const useSwap = () => {
         console.log("Using Classic DEX Path Payment fallback...");
         
         const account = await horizonServer.loadAccount(userAddress);
-        const assetIn = tokenIn === "XLM" ? Asset.native() : new Asset("TKNA", ISSUER_ADDRESS);
-        const assetOut = tokenIn === "XLM" ? new Asset("TKNA", ISSUER_ADDRESS) : Asset.native();
+        const assetIn = tokenIn === "XLM" ? Asset.native() : new Asset("MTLSW", ISSUER_ADDRESS);
+        const assetOut = tokenIn === "XLM" ? new Asset("MTLSW", ISSUER_ADDRESS) : Asset.native();
 
         // Convert scaled integer strings (raw amounts) back to decimal strings for Classic Operations
         const decAmountIn = (BigInt(amountIn).toString().padStart(8, '0'));
@@ -209,8 +209,8 @@ export const useSwap = () => {
 
   const getSwapQuote = async (tokenIn: string, amountIn: string, tokenOut: string) => {
     try {
-      const assetIn = tokenIn === "XLM" ? Asset.native() : new Asset("TKNA", ISSUER_ADDRESS);
-      const assetOut = tokenOut === "XLM" ? Asset.native() : new Asset("TKNA", ISSUER_ADDRESS);
+      const assetIn = tokenIn === "XLM" ? Asset.native() : new Asset("MTLSW", ISSUER_ADDRESS);
+      const assetOut = tokenOut === "XLM" ? Asset.native() : new Asset("MTLSW", ISSUER_ADDRESS);
       
       // Convert scaled integer string to decimal for Horizon API
       const decAmountIn = (BigInt(amountIn).toString().padStart(8, '0'));

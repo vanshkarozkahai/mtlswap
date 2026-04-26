@@ -6,88 +6,82 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-black">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-industrial-charcoal">
       {/* Background Grid */}
-      <div className="absolute inset-0 grid-background opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 grid-background opacity-20 pointer-events-none" />
       
-      {/* Ambient Orbs */}
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-cyan-200/30 rounded-full blur-[120px] animate-pulse-slow pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-100/40 rounded-full blur-[120px] animate-pulse-slow pointer-events-none" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
-           initial={{ opacity: 1, y: 0 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
+           initial={{ opacity: 0, x: -50 }}
+           animate={{ opacity: 1, x: 0 }}
+           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-sm border border-white/10 text-xs font-bold mb-6 text-brand-cyan">
-            <span className="flex h-2 w-2 rounded-full bg-brand-cyan animate-ping" />
-                Soroban Mainnet Soon
+          <div className="inline-flex items-center gap-2 px-4 py-1 recessed text-[10px] font-mono mb-6 text-industrial-silver">
+            <span className="flex h-1.5 w-1.5 bg-industrial-silver animate-pulse" />
+                SYSTEM_STATUS: SOROBAN_READY
           </div>
-          <h1 className="text-6xl md:text-8xl font-bold leading-[1.1] mb-8 text-slate-50">
-            Trade at the <br />
-            <span className="text-gradient">Speed of Blockchain</span>
+          <h1 className="text-6xl md:text-8xl font-black leading-[0.9] mb-8 text-industrial-silver uppercase tracking-tighter">
+            MACHINED <br />
+            FOR THE <span className="text-industrial-gray">BLOCKCHAIN</span>
           </h1>
-          <p className="text-xl text-slate-400 mb-10 max-w-lg leading-relaxed">
-            The next generation of decentralized trading. Powered by Soroban smart contracts, built for the global economy.
+          <p className="text-lg font-mono text-industrial-gray mb-10 max-w-lg leading-tight uppercase">
+            Heavy-duty decentralized trading. Built with precision Soroban smart contracts. No friction. No latency.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/swap" className="px-8 py-4 bg-brand-cyan text-white rounded-2xl font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg shadow-brand-cyan/30">
-              Start Trading <ArrowRight size={20} />
+            <Link href="/swap" className="btn-industrial bg-industrial-silver text-industrial-charcoal px-10 py-5 text-lg flex items-center gap-2">
+              INITIALIZE_SWAP <ArrowRight size={20} />
             </Link>
-            <Link href="#features" className="px-8 py-4 bg-black border border-white/10 text-slate-400 rounded-2xl font-bold hover:bg-black transition-colors">
-              Read Docs
+            <Link href="#features" className="btn-industrial px-10 py-5 text-lg text-industrial-gray">
+              RESOURCES.MD
             </Link>
           </div>
           
           <div className="mt-12 flex items-center gap-6">
-            <div className="flex -space-x-3">
+            <div className="flex -space-x-1">
               {[1,2,3,4].map(i => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-white/10" />
+                <div key={i} className="w-8 h-8 plate border border-industrial-border" />
               ))}
             </div>
-            <div className="text-sm text-slate-400">
-              <span className="font-bold text-slate-50">2,400+</span>
-              <span className="ml-1">Beta Users</span>
+            <div className="text-[10px] font-mono text-industrial-gray uppercase tracking-widest">
+              <span className="font-bold text-industrial-silver">2,400+</span>
+              <span className="ml-2">ACTIVE_NODES</span>
             </div>
           </div>
         </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
           className="relative flex justify-center lg:justify-end"
         >
           {/* Main Hero Asset */}
-          <motion.div 
-             animate={{ y: [0, -10, 0] }}
-             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-             className="relative w-full max-w-lg"
-          >
-             <img 
-               src="/assets/auraswap_hero.png" 
-               alt="AuraSwap"
-               className="rounded-[40px] shadow-2xl border border-white/10"
-             />
+          <div className="relative w-full max-w-lg plate p-2 bg-industrial-border/20">
+             <div className="recessed p-1">
+               <img 
+                 src="/assets/metalswap_hero.png" 
+                 alt="Metal-Swap"
+                 className="grayscale contrast-125 brightness-75"
+               />
+             </div>
              
-             {/* Live TPS Badge - Updated for light mode */}
+             {/* Live TPS Badge - Industrial Gauge Style */}
              <motion.div 
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -top-6 -left-6 bg-black/90 backdrop-blur-md border border-white/10 px-6 py-4 rounded-3xl shadow-xl"
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                className="absolute -top-6 -right-6 plate p-4 bg-industrial-steel shadow-2xl"
              >
                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-brand-cyan/10 text-brand-cyan rounded-lg">
+                    <div className="p-2 recessed text-industrial-silver">
                        <Zap size={20} />
                     </div>
                     <div>
-                       <div className="text-[10px] uppercase font-bold text-slate-400">Live Throughput</div>
-                       <div className="text-xl font-bold text-slate-50">248 TPS</div>
+                       <div className="text-[9px] uppercase font-mono text-industrial-gray">CORE_THROUGHPUT</div>
+                       <div className="text-xl font-mono font-bold text-industrial-silver">248.55_TPS</div>
                     </div>
                  </div>
              </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

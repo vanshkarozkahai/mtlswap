@@ -12,25 +12,25 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 w-full z-[999] px-6 py-4">
-      <div className="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto plate px-6 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-brand-cyan/10 rounded-lg group-hover:scale-110 transition-transform animate-pulse">
-            <Activity size={20} className="text-brand-cyan" />
+          <div className="p-2 recessed group-hover:brightness-125 transition-all">
+            <Activity size={20} className="text-industrial-silver" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-50">AuraSwap</span>
+          <span className="font-bold text-xl tracking-tighter uppercase text-industrial-silver">MetalSwap</span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-400">
-          <Link href="/swap" className="hover:text-brand-cyan transition-colors">Swap</Link>
-          <Link href="/liquidity" className="hover:text-brand-cyan transition-colors">Liquidity</Link>
-          <Link href="/pool" className="hover:text-brand-cyan transition-colors">Analytics</Link>
-          <Link href="/admin" className="hover:text-brand-cyan transition-colors border-l border-white/10 pl-6">Admin</Link>
+        <div className="hidden md:flex items-center gap-6 text-xs font-mono text-industrial-gray">
+          <Link href="/swap" className="hover:text-industrial-silver transition-colors">SWAP</Link>
+          <Link href="/liquidity" className="hover:text-industrial-silver transition-colors">LIQUIDITY</Link>
+          <Link href="/pool" className="hover:text-industrial-silver transition-colors">ANALYTICS</Link>
+          <Link href="/admin" className="hover:text-industrial-silver transition-colors border-l border-industrial-border pl-6">ADMIN</Link>
           {address && (
             <a 
               href={`https://laboratory.blockchain.org/#account-creator?public_key=${address}`}
               target="_blank" 
-              className="hidden lg:flex items-center gap-1 text-[9px] font-bold text-brand-cyan hover:text-brand-blue transition-colors uppercase tracking-widest"
+              className="hidden lg:flex items-center gap-1 text-[9px] font-bold text-industrial-silver hover:underline transition-colors uppercase tracking-widest"
             >
               Get Testnet Tokens
             </a>
@@ -38,14 +38,14 @@ export default function Navbar() {
           <button 
             onClick={connect}
             disabled={loading}
-            className="bg-brand-cyan text-white px-5 py-2 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all flex items-center gap-2 disabled:opacity-50 shadow-lg shadow-brand-cyan/20"
+            className="btn-industrial py-2"
           >
-            {loading ? "Connecting..." : address ? `${address.slice(0,4)}...${address.slice(-4)}` : "Connect Wallet"}
+            {loading ? "PENDING..." : address ? `${address.slice(0,4)}...${address.slice(-4)}` : "CONNECT_TERMINAL"}
           </button>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-slate-400" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden text-industrial-gray" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -55,18 +55,18 @@ export default function Navbar() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-20 left-6 right-6 glass p-6 rounded-2xl flex flex-col gap-4 text-center"
+          className="md:hidden absolute top-20 left-6 right-6 plate p-6 flex flex-col gap-4 text-center font-mono"
         >
-          <Link href="/swap" onClick={() => setIsOpen(false)} className="text-slate-400 font-medium">Swap Tokens</Link>
-          <Link href="/liquidity" onClick={() => setIsOpen(false)} className="text-slate-400 font-medium">Add Liquidity</Link>
-          <Link href="/pool" onClick={() => setIsOpen(false)} className="text-slate-400 font-medium">Protocol Analytics</Link>
-          <Link href="/admin" onClick={() => setIsOpen(false)} className="text-brand-cyan font-bold">Admin Hub</Link>
+          <Link href="/swap" onClick={() => setIsOpen(false)} className="text-industrial-gray text-sm">SWAP TOKENS</Link>
+          <Link href="/liquidity" onClick={() => setIsOpen(false)} className="text-industrial-gray text-sm">ADD LIQUIDITY</Link>
+          <Link href="/pool" onClick={() => setIsOpen(false)} className="text-industrial-gray text-sm">PROTOCOL ANALYTICS</Link>
+          <Link href="/admin" onClick={() => setIsOpen(false)} className="text-industrial-silver font-bold">ADMIN HUB</Link>
           <button 
              onClick={() => { connect(); setIsOpen(false); }}
              disabled={loading}
-             className="bg-brand-cyan text-white py-3 rounded-xl font-bold disabled:opacity-50"
+             className="btn-industrial w-full"
           >
-             {loading ? "Connecting..." : address ? `${address.slice(0,4)}...${address.slice(-4)}` : "Connect Wallet"}
+             {loading ? "PENDING..." : address ? `${address.slice(0,4)}...${address.slice(-4)}` : "CONNECT_TERMINAL"}
           </button>
         </motion.div>
       )}

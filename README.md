@@ -1,11 +1,11 @@
-# 🧪 AuraSwap
+# 🧪 Metal-Swap
 
-![AuraSwap Hero Banner](screenshots/dashboard.png)
+![Metal-Swap Hero Banner](screenshots/dashboard.png)
 
 <div align="center">
   <p><strong>Trade at the Speed of Blockchain. Atomic. Transparent. Interconnected.</strong></p>
   
-  [![AuraSwap CI](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml)
+  [![Metal-Swap CI](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml)
   [![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat&logo=vercel)](https://blockchain-swap-frontend.vercel.app/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
   [![Network: Testnet](https://img.shields.io/badge/Network-Testnet-cyan.svg)](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases)
@@ -15,7 +15,7 @@
 
 ### 🚀 [Live Demo](https://blockchain-swap-frontend.vercel.app/)
 
-AuraSwap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
+Metal-Swap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
 
 ## ✨ Features
 
@@ -29,13 +29,13 @@ AuraSwap is an institutional-grade Decentralized Exchange (DEX) protocol built o
 
 | Main Trading Dashboard | Mobile Interface & Health |
 |:---:|:---:|
-| ![AuraSwap Dashboard](screenshots/dashboard_desktop.png) | ![AuraSwap Mobile](screenshots/swap_mobile.png) |
+| ![Metal-Swap Dashboard](screenshots/dashboard.png) | ![Metal-Swap Admin](screenshots/admin.png) |
 
 
 
 ## 🏗️ Technical Architecture
 
-AuraSwap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
+Metal-Swap utilizes a hub-and-spoke execution model where the **Router** contract orchestrates interactions between standard tokens and liquidity reserves.
 
 ```mermaid
 graph TD
@@ -58,8 +58,8 @@ graph TD
 | Item | Value | Verification |
 |------|-------|:---:|
 | **Network** | Blockchain Testnet | [View Network](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases) |
-| **Token Asset Code** | `BSWP` | - |
-| **Token Issuer Address** | `GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM` | [Verify Issuer](https://stellar.expert/explorer/testnet/account/GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM) |
+| **Token Asset Code** | `MTLSW` | - |
+| **Token Issuer Address** | `GBKNHIATMCYTFZZZUX347NF2SCH7MKMT7HS73HOVCC55CDJEI53I6S5A` | [Verify Issuer](https://stellar.expert/explorer/testnet/account/GBKNHIATMCYTFZZZUX347NF2SCH7MKMT7HS73HOVCC55CDJEI53I6S5A) |
 | **Router Contract ID** | `CBNKNOG37YHDBIAZDMDDLR2CVZ2KVJKASOM2APWSIFZ5ECGIRS3A6B55` | [Verify Router](https://stellar.expert/explorer/testnet/contract/CBNKNOG37YHDBIAZDMDDLR2CVZ2KVJKASOM2APWSIFZ5ECGIRS3A6B55) |
 | **Liquidity Pool ID** | `GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM` | [Verify Hub](https://stellar.expert/explorer/testnet/account/GBSDMBQCO3Q73LABJKLHVGRAIBKESOXBATZ5UTMJE6PMQ6N6X4CQPNBM) |
 |**Sample Transaction Hash**| `17fe9879704a46ce0d2193e0ea1ed4263c2af3c8901ffa20bb3a1b11b8560cce` [Explorer Link] (https://stellar.expert/explorer/testnet/op/9322265170681857)|
@@ -97,14 +97,14 @@ cargo test
 ```
 
 ## 🧪 CI/CD Pipeline
-AuraSwap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
+Metal-Swap uses GitHub Actions for automated verification. You can view the status badge at the top of this file. The pipeline ensures:
 - Rust toolchain (v1.81.0) compatibility.
 - successful WASM compilation for all contracts.
 - Frontend linting and type checking.
 
 ## 📄 License
 
-AuraSwap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+Metal-Swap is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
