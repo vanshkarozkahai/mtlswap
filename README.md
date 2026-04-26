@@ -6,14 +6,14 @@
   <p><strong>Trade at the Speed of Blockchain. Atomic. Transparent. Interconnected.</strong></p>
   
   [![Metal-Swap CI](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Garvitk06/blockchain-swap/actions/workflows/ci.yml)
-  [![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployed-black?style=flat&logo=vercel)](https://blockchain-swap-frontend.vercel.app/)
+  [![Netlify Deployment](https://img.shields.io/badge/Netlify-Deployed-black?style=flat&logo=netlify)](https://chimerical-malabi-f43e3e.netlify.app/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
   [![Network: Testnet](https://img.shields.io/badge/Network-Testnet-cyan.svg)](https://developers.stellar.org/docs/fundamentals-and-concepts/network-passphrases)
 </div>
 
 ---
 
-### 🚀 [Live Demo](https://blockchain-swap-frontend.vercel.app/)
+### 🚀 [Live Demo](https://chimerical-malabi-f43e3e.netlify.app/)
 
 Metal-Swap is an institutional-grade Decentralized Exchange (DEX) protocol built on the Blockchain network using Soroban smart contracts. It enables seamless, atomic trading and liquidity provision with a high-fidelity user interface.
 
