@@ -81,7 +81,7 @@ graph TD
 ### 2. Local Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Garvitk06/blockchain-swap.git && cd blockchain-swap
+git clone https://github.com/vanshkarozkahai/mtlswap.git && cd mtlswap
 
 # Setup Frontend
 cd frontend && npm install
